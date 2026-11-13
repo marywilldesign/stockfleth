@@ -56,6 +56,11 @@ div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px soli
   border:1px solid var(--fg);border-radius:50%;pointer-events:none;z-index:0}
 .ctl .rng:has(input:disabled)::after{opacity:.35}
 .ctl .rng input{position:relative;z-index:1}
+/* markers at the common values (named weights / widths); filled once the line reaches them */
+.ctl .rng .tick{position:absolute;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;box-sizing:border-box;border:1px solid var(--fg);
+  border-radius:50%;background:var(--bg);pointer-events:none;z-index:0}
+.ctl .rng .tick.on{background:var(--fg)}
+.ctl .rng:has(input:disabled) .tick{opacity:.35}
 .ctl select{height:36px}
 .s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:5/7}.s-fit{grid-column:7/8}.s-colours{grid-column:8/9}
 .lbl,.val,.badge,.sub,.section>h2,.grow h3,footer.g8,.dl a span,.cap{text-transform:uppercase;letter-spacing:.06em}
@@ -132,9 +137,9 @@ footer .k{font-weight:1000}
   <p class="sub">variable mono font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </header>
 <div class="g8 bar" role="toolbar" aria-label="stockfleth controls">
-  <div class="ctl s-weight"><div class="top"><span class="lbl">weight</span><span class="val" id="wghtv">400</span></div><div class="rng"><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"></div></div>
-  <div class="ctl s-slant"><div class="top"><span class="lbl">slant</span><span class="val" id="slntv">0°</span></div><div class="rng"><input id="slnt" type="range" min="0" max="12" step="0.5" value="0" aria-label="slant in degrees"></div></div>
-  <div class="ctl s-width"><div class="top"><span class="lbl">width</span><span class="val" id="wdthv">100</span></div><div class="rng"><input id="wdth" type="range" min="70" max="145" value="100" aria-label="width"></div></div>
+  <div class="ctl s-weight"><div class="top"><span class="lbl">weight</span><span class="val" id="wghtv">400</span></div><div class="rng" data-marks="200,300,400,500,600,700,800,900"><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"></div></div>
+  <div class="ctl s-slant"><div class="top"><span class="lbl">slant</span><span class="val" id="slntv">0°</span></div><div class="rng" data-marks="3,6,9"><input id="slnt" type="range" min="0" max="12" step="0.5" value="0" aria-label="slant in degrees"></div></div>
+  <div class="ctl s-width"><div class="top"><span class="lbl">width</span><span class="val" id="wdthv">100</span></div><div class="rng" data-marks="75,87.5,100,112.5,125"><input id="wdth" type="range" min="70" max="145" value="100" aria-label="width"></div></div>
   <div class="ctl s-fit"><div class="top"><span class="lbl">fit</span></div><div class="row">
     <button id="adapt" aria-pressed="true" title="each line stretches and scales to fill the box">adaptive</button></div></div>
   <div class="ctl s-colours"><div class="top"><span class="lbl">colours</span></div><div class="row">
@@ -147,7 +152,7 @@ footer .k{font-weight:1000}
   <section class="section" aria-labelledby="download"><h2 class="lab" id="download" style="grid-column:1/3">download</h2>
     <div class="dl">
       <a href="fonts/Stockfleth-VF.ttf" download><b>variable ttf</b><span>one file, every weight, width and italic. for figma, adobe, macos, windows.</span></a>
-      <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (37 kb).</span></a>
+      <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (50 kb).</span></a>
       <a href="fonts/Stockfleth-static-otf.zip" download><b>static otf</b><span>20 styles, hairline to ultra, upright and italic. for apps without variable font support.</span></a>
     </div></section>
 </main>
@@ -210,7 +215,13 @@ function stretchAt(el,W,fs){   // fixed size: let the width axis alone fill the 
   let lo=70,hi=145; if(set(hi)<=W){lo=hi} else for(let i=0;i<14;i++){const m=(lo+hi)/2; if(set(m)>W) hi=m; else lo=m}
   set(lo); if(el.scrollWidth>W+1){el.style.whiteSpace=''} el.style.width='';
 }
-function fillTo(el){el.style.setProperty('--p',(el.value-el.min)/(el.max-el.min)*100+'%')}
+function fillTo(el){
+  el.style.setProperty('--p',(el.value-el.min)/(el.max-el.min)*100+'%');
+  el.parentElement.querySelectorAll('.tick').forEach(t=>t.classList.toggle('on',+el.value>=+t.dataset.v));
+}
+document.querySelectorAll('.rng[data-marks]').forEach(r=>{const el=r.querySelector('input');
+  r.dataset.marks.split(',').forEach(v=>{const t=document.createElement('span');t.className='tick';t.dataset.v=v;
+    const p=(v-el.min)/(el.max-el.min);t.style.left=`calc(7px + (100% - 14px) * ${p})`;r.appendChild(t)})});
 function layout(){
   const W=(stage.clientWidth-32)*(1-0.06*S.slnt/12);
   [...stage.children].forEach(el=>{
@@ -241,7 +252,11 @@ function layout(){
   document.querySelectorAll('input[type=range]').forEach(fillTo);
 }
 // within 4% of the top of its range, the dot snaps into the ring at the end
-function snap(el){const lo=+el.min,hi=+el.max;if(hi-(+el.value)<=(hi-lo)*0.04)el.value=hi;return +el.value}
+function snap(el){const lo=+el.min,hi=+el.max,v=+el.value;
+  if(hi-v<=(hi-lo)*0.04){el.value=hi;return hi}                       // into the end ring
+  const marks=(el.parentElement.dataset.marks||'').split(',').filter(Boolean).map(Number);
+  for(const m of marks){if(Math.abs(v-m)<=(hi-lo)*0.015){el.value=m;return +el.value}}   // gently onto a marker
+  return v}
 $('wght').oninput=e=>{S.wght=snap(e.target);layout()};
 $('wdth').oninput=e=>{S.wdth=snap(e.target);layout()};
 $('slnt').oninput=e=>{S.slnt=snap(e.target);layout()};
