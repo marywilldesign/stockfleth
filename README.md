@@ -16,7 +16,7 @@ Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold,
 
 ## Character set
 
-221 characters: ASCII plus the Western European set (Windows-1252 / Latin-1): accented letters, curly quotes, dashes, €, £, ©, ™, fractions, ✓ ✗ and more. Standard ligatures `fi`, `fl` and `ff` each take exactly two cells, so the grid holds.
+229 characters: ASCII, the Western European set (Windows-1252 / Latin-1) and Northern Sámi (Č Đ Ŋ Ŧ): accented letters, curly quotes, dashes, €, £, ©, ™, fractions, ✓ ✗ and more. Standard ligatures `fi`, `fl` and `ff` each take exactly two cells, so the grid holds.
 
 ## Files
 
