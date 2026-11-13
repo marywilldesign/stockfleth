@@ -16,7 +16,7 @@ Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold,
 
 ## Character set
 
-238 characters: ASCII, the Western European set (Windows-1252 / Latin-1) and every Latin-script Sámi alphabet (Northern, Lule, Southern, Ume, Pite, Inari and Skolt: Č Đ Ŋ Ŧ Ʒ Ǯ Ǧ Ǥ Ǩ ʹ): accented letters, curly quotes, dashes, €, £, ©, ™, fractions, ✓ ✗ and more. Strictly monospaced: every glyph has the same advance width. The `fi`, `fl` and `ff` ligatures swap in single-cell alternates that sit a little closer together (the Fira Code / JetBrains Mono approach), so columns never shift; turn them off with `font-variant-ligatures: none` or your editor's ligature setting.
+246 characters: ASCII, the Western European set (Windows-1252 / Latin-1) and every Latin-script Sámi alphabet (Northern, Lule, Southern, Ume, Pite, Inari and Skolt: Č Đ Ŋ Ŧ Ʒ Ǯ Ǧ Ǥ Ǩ ʹ): accented letters, curly quotes, dashes, €, £, ©, ™, fractions, arrows, ✓ ✗ and more. Strictly monospaced: every glyph has the same advance width. The `fi`, `fl` and `ff` ligatures swap in single-cell alternates that sit a little closer together (the Fira Code / JetBrains Mono approach), so columns never shift; turn them off with `font-variant-ligatures: none` or your editor's ligature setting.
 
 ## Files
 
