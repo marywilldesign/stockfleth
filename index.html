@@ -44,7 +44,7 @@ a:not(.dl a):hover{font-weight:1000}
 
 /* header */
 header.intro{padding-top:22px;padding-bottom:20px;align-items:end}
-.intro h1{grid-column:1/-1;margin:0;font-family:Stockfleth;font-weight:400;font-variation-settings:"wght" 1000,"wdth" 100;font-size:clamp(56px,9vw,128px);line-height:1.25;margin-top:-.2em}
+.intro h1{grid-column:1/-1;margin:0;font-family:Stockfleth;font-weight:400;font-variation-settings:"wght" 1000,"wdth" 100;font-size:min(128px,max(56px,9vw),calc((100vw - 32px) / 6.8));line-height:1.25;margin-top:-.2em}
 .intro .sub{grid-column:1/-1;margin:0;font-size:20px;line-height:25px}
 
 /* controls: label above control, one block per column span */
@@ -125,6 +125,7 @@ main.g8{padding-top:22px}
 /* footer on the same columns */
 footer.g8{border-top:1px solid var(--fg);padding-top:18px;padding-bottom:30px;display:flex;justify-content:space-between;gap:20px var(--gut)}
 footer p{margin:0}
+.nw{white-space:nowrap}
 
 footer .k{font-weight:1000}
 
@@ -142,6 +143,7 @@ footer .k{font-weight:1000}
   :root{--pad:16px;--gut:14px}
   .g8,.section,.grow,.dl{grid-template-columns:repeat(2,minmax(0,1fr))}
   .s-weight,.s-width,.s-slant,.s-size{grid-column:1/-1}
+  .colour{white-space:normal;font-size:16px;line-height:21px;justify-self:stretch;justify-content:flex-end}
   .dl a{grid-column:1/-1;min-height:0}
   footer.g8{flex-direction:column}
   .bar{position:static}
@@ -170,9 +172,9 @@ footer .k{font-weight:1000}
     </div></section>
 </main>
 <footer class="g8">
-  <p class="f1"><span class="k">stockfleth:</span><br>characters (251)<br>wght (100–1000) · wdth (70–145)<br><em class="it">italic</em>, mono</p>
-  <p class="f2">a mono font drawn line by line on a 5 × 9 grid.<br>variable: weight, width, <em class="it">italic</em>.<br>good for display and tech docs.<br>fluent in the nordic and latin-script sámi languages.</p>
-  <p class="f3">free for personal and trial use.<br><a href="https://marywildesign.com" rel="noopener">contact me</a> for commercial use.<br>read the <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">licence</a><br>© 2026 <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
+  <p class="f1"><span class="k">stockfleth:</span><br>characters (251)<br><span class="nw">wght (100–1000) ·</span> <span class="nw">wdth (70–145)</span><br><em class="it">italic</em>, mono</p>
+  <p class="f2"><span class="nw">a mono font drawn line by line</span> <span class="nw">on a 5 × 9 grid.</span><br><span class="nw">variable: weight,</span> <span class="nw">width, <em class="it">italic</em>.</span><br><span class="nw">good for display</span> <span class="nw">and tech docs.</span><br><span class="nw">fluent in the nordic and</span> <span class="nw">latin-script sámi languages.</span></p>
+  <p class="f3"><span class="nw">free for personal</span> <span class="nw">and trial use.</span><br><span class="nw"><a href="https://marywildesign.com" rel="noopener">contact me</a></span> <span class="nw">for commercial use.</span><br>read the <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">licence</a><br>© 2026 <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </footer>
 
 <script>
@@ -298,7 +300,7 @@ const GROUPS=[
  ['accented uppercase','ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠÙÚÛÜÝŸŽÞČĐŊŦƷǮǦǤǨŃẞ'],
  ['accented lowercase','àáâãäåæçèéêëìíîïıðñòóôõöøœšßùúûüýÿžþµčđŋŧʒǯǧǥǩńĸ'],
  ['arrows','←↑→↓↖↗↘↙↻'],
- ['ligatures',['fi','fl','ff']]];
+ ['ligatures',['fi','fl','ff','ft','fj','->','=>','<-']]];
 const CS=$('charsets');
 for(const [name,chars] of GROUPS){
   const list=Array.isArray(chars)?chars:[...chars];
@@ -369,7 +371,7 @@ function refreshColours(){
   apply();
   $('colour-status').textContent=fam.name+', '+harmony+', contrast '+contrast(FG,BG).toFixed(1)+' to 1';
   const hex=c=>'#'+c.map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
-  $('colourv').textContent=hex(FG)+' on '+hex(BG)+' ('+harmony+')';   // the actual colours, not the family they were drawn from
+  $('colourv').innerHTML='<span class="nw">'+hex(FG)+' on '+hex(BG)+'</span> <span class="nw">('+harmony+')</span>';   // the actual colours, not the family they were drawn from
 }
 function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
