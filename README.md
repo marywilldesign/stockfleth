@@ -1,6 +1,6 @@
 # stockfleth
 
-A mono font drawn line by line on a 5 × 9 grid: variable, adaptive, and fluent in the Nordic languages and Northern, Lule, Southern and Inari Sámi.
+A mono font drawn line by line on a 5 × 9 grid: variable, adaptive, and fluent in the Nordic languages and every Latin-script Sámi language.
 
 **Live specimen:** https://marywildesign.com/stockfleth/
 
@@ -16,7 +16,7 @@ Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold,
 
 ## Character set
 
-229 characters: ASCII, the Western European set (Windows-1252 / Latin-1) and Northern Sámi (Č Đ Ŋ Ŧ): accented letters, curly quotes, dashes, €, £, ©, ™, fractions, ✓ ✗ and more. Standard ligatures `fi`, `fl` and `ff` each take exactly two cells, so the grid holds.
+238 characters: ASCII, the Western European set (Windows-1252 / Latin-1) and every Latin-script Sámi alphabet (Northern, Lule, Southern, Ume, Pite, Inari and Skolt: Č Đ Ŋ Ŧ Ʒ Ǯ Ǧ Ǥ Ǩ ʹ): accented letters, curly quotes, dashes, €, £, ©, ™, fractions, ✓ ✗ and more. Standard ligatures `fi`, `fl` and `ff` each take exactly two cells, so the grid holds.
 
 ## Files
 

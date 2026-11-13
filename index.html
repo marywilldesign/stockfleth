@@ -4,16 +4,16 @@
 <meta name="description" content="stockfleth — a variable monospace typeface drawn on a 5×9 module grid. weight, width and italic axes.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
-@font-face{font-family:Stockfleth;src:url(fonts/Stockfleth-VF.woff2) format("woff2"),url(fonts/Stockfleth-VF.ttf) format("truetype");font-display:swap}
+@font-face{font-family:Stockfleth;src:url(fonts/Stockfleth-VF.woff2) format("woff2"),url(fonts/Stockfleth-VF.ttf) format("truetype");font-weight:100 1000;font-stretch:70% 145%;font-style:normal;font-display:swap}
 :root{--fg:#1f3fd1;--bg:#eef0fb}
 html{transition:none}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--fg)}
-body{font:12px/1.4 ui-monospace,Menlo,monospace;min-height:100vh}
+body{font:600 13px/1.45 Stockfleth,ui-monospace,Menlo,monospace;min-height:100vh}
 .bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:2px solid var(--fg);
      display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;padding:12px 20px}
 .grp{display:flex;align-items:center;gap:8px}
-.lbl{font-weight:700;letter-spacing:.04em}
+.lbl{font-weight:800;letter-spacing:.04em}
 input[type=range]{width:150px;accent-color:var(--fg)}
 input[type=range]:disabled{opacity:.35}
 .val{min-width:34px;font-variant-numeric:tabular-nums}
@@ -27,7 +27,7 @@ button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
 button.b{font-weight:800}button.i{font-style:italic}
 input[type=color]{width:34px;height:28px;padding:0;border:1.5px solid var(--fg);background:none;cursor:pointer}
 .badge{padding:3px 0;font-variant-numeric:tabular-nums}
-.badge .mk{font-family:Stockfleth,ui-monospace,monospace;font-variation-settings:"wght" 700;font-size:1.25em;vertical-align:-.08em;margin-left:.25em}
+.badge .mk{font-family:Stockfleth,ui-monospace,Menlo,monospace;font-variation-settings:"wght" 700;font-size:1.25em;vertical-align:-.08em;margin-left:.25em}
 .badge.fail{text-decoration:underline;text-underline-offset:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .sep{width:1.5px;align-self:stretch;background:var(--fg);opacity:.25}
@@ -40,29 +40,28 @@ h3{font-size:11px;font-weight:700;letter-spacing:.04em;margin:18px 0 8px}h3 span
 .cells.wide div{width:138px}
 .cells{display:flex;flex-wrap:wrap;padding:2px 0 0 2px;margin-bottom:8px}
 .cells div{width:70px;border:2px solid var(--fg);margin:-2px 0 0 -2px;height:124px;padding-top:22px;display:flex;align-items:center;justify-content:center;font-family:Stockfleth,ui-monospace,Menlo,Consolas,monospace;font-size:50px;line-height:1;position:relative;overflow:hidden}
-.cells small{position:absolute;left:0;top:0;right:0;z-index:2;padding:3px 4px;background:var(--bg);font:9px ui-monospace,monospace;color:color-mix(in srgb,var(--fg) 65%,var(--bg))}
+.cells small{position:absolute;left:0;top:0;right:0;z-index:2;padding:3px 4px;background:var(--bg);font:500 10px Stockfleth,ui-monospace,monospace;color:color-mix(in srgb,var(--fg) 65%,var(--bg))}
 .dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;border-left:1.5px solid var(--fg);border-top:1.5px solid var(--fg);margin:0 0 30px}
 .dl a{display:block;padding:14px 16px;border-right:1.5px solid var(--fg);border-bottom:1.5px solid var(--fg);color:var(--fg);text-decoration:none}
 .dl a:hover,.dl a:focus-visible{background:var(--fg);color:var(--bg);outline:none}
-.dl b{display:block;font-family:Stockfleth,ui-monospace,monospace;font-size:30px;font-weight:400;font-variation-settings:"wght" 700;margin-bottom:6px}
+.dl b{display:block;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-size:30px;font-weight:400;font-variation-settings:"wght" 700;margin-bottom:6px}
 .dl span{opacity:.75}
 h2{font-size:12px;font-weight:700;letter-spacing:.04em;margin:0 0 10px}
 footer{border-top:2px solid var(--fg);padding:16px 20px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer a{color:var(--fg)}
 @media (max-width:700px){input[type=range]{width:110px}.bar{padding:10px 16px}main{padding:16px}}
-.intro{padding:22px 20px 18px;display:grid;grid-template-columns:minmax(0,auto) minmax(0,560px);gap:8px 40px;align-items:end;justify-content:space-between}
-.intro h1{margin:0;font-family:Stockfleth,ui-monospace,monospace;font-weight:400;font-variation-settings:"wght" 800,"wdth" 100;font-size:clamp(40px,7vw,92px);line-height:.9;letter-spacing:0}
+.intro{--h:clamp(40px,7vw,92px);padding:22px 20px 18px;display:grid;grid-template-columns:auto auto;gap:8px 40px;align-items:start;justify-content:space-between}
+.intro h1{margin:0;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-weight:400;font-variation-settings:"wght" 800,"wdth" 100;font-size:var(--h);line-height:.9;letter-spacing:0}
 .intro .by{margin:8px 0 0}
 .intro .by a{color:var(--fg)}
-.intro p.pre{margin:0;max-width:560px;line-height:1.7}
-@media (max-width:820px){.intro{grid-template-columns:1fr}}
+.intro p.pre{margin:0;font-size:calc(var(--h) * .9 / 4 / 1.25);line-height:1.25;white-space:nowrap;height:calc(var(--h) * .9);display:flex;flex-direction:column;justify-content:space-between}
+.intro p.pre span{display:block}
+@media (max-width:1100px){.intro{grid-template-columns:1fr}.intro p.pre{font-size:13px;line-height:1.5;white-space:normal;height:auto;display:block}.intro p.pre span{display:inline}.intro p.pre span::after{content:" "}}
 ::selection{background:var(--fg);color:var(--bg)}
 </style></head><body>
 <header class="intro">
   <div><h1>STOCKFLETH</h1><p class="by">font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p></div>
-  <p class="pre">a mono font drawn line by line on a 5 × 9 grid.<br>
-  variable and adaptive: weight, width, italic.<br>
-  for code and for display, fluent in the nordic languages and northern, lule, southern and inari sámi.</p>
+  <p class="pre"><span>a mono font drawn line by line on a 5 × 9 grid.</span><span>variable and adaptive: weight, width, italic.</span><span>for code and for display.</span><span>fluent in the nordic languages and every latin-script sámi language.</span></p>
 </header>
 <div class="bar" role="toolbar" aria-label="stockfleth controls">
   <div class="grp"><span class="lbl">weight</span><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"><span class="val" id="wghtv">400</span></div>
@@ -82,18 +81,18 @@ footer a{color:var(--fg)}
 </div>
 
 <main>
-  <div id="stage" aria-label="type here"></div>
+  <div id="stage" aria-label="type here" contenteditable="true" spellcheck="false"></div>
   <h2>characters</h2>
   <div id="charsets"></div>
   <h2 id="download">download</h2>
   <div class="dl">
     <a href="fonts/Stockfleth-VF.ttf" download><b>variable ttf</b><span>one file, every weight · width · italic. for figma, adobe, macos, windows.</span></a>
-    <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (34 kb).</span></a>
+    <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (36 kb).</span></a>
     <a href="fonts/Stockfleth-static-otf.zip" download><b>static otf</b><span>20 styles, hairline → ultra, upright + italic. for apps without variable font support.</span></a>
   </div>
 </main>
 <footer>
-  <span>stockfleth · 229 characters · wght 100–1000 · wdth 70–145 · italic</span>
+  <span>stockfleth · 238 characters · wght 100–1000 · wdth 70–145 · italic</span>
   <span>free for personal and trial use · commercial use needs a licence · <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">read the licence</a></span>
   <span>by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></span>
 </footer>
@@ -105,17 +104,29 @@ const $=id=>document.getElementById(id);
 const stage=$('stage');
 const fvs=(w,d)=>`"wght" ${w}, "wdth" ${d}, "slnt" ${S.ital?-12:0}`;
 
-function makeLine(text){const d=document.createElement('div');d.className='line';d.contentEditable='true';d.spellcheck=false;d.textContent=text;return d}
-['THE QUICK','brown fox','{jumps} over','the lazy dog 7:30','Zürich · café · €12,50 — «déjà vu» … fi fl ff'].forEach(t=>stage.appendChild(makeLine(t)));
+function makeLine(text){const d=document.createElement('div');d.className='line';d.textContent=text;return d}
+['the QUICK brown fox {jumps} over the LAZY dog @ 4:20'].forEach(t=>stage.appendChild(makeLine(t)));
 
-stage.addEventListener('keydown',e=>{
-  const ln=e.target.closest('.line'); if(!ln) return;
-  if(e.key==='Enter'){e.preventDefault();const n=makeLine('');ln.after(n);n.focus();layout()}
-  if(e.key==='Backspace'&&ln.textContent===''&&stage.children.length>1){e.preventDefault();const p=ln.previousElementSibling||ln.nextElementSibling;ln.remove();p.focus();
-    const r=document.createRange();r.selectNodeContents(p);r.collapse(false);const s=getSelection();s.removeAllRanges();s.addRange(r);layout()}
-});
-stage.addEventListener('input',()=>layout());
-stage.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,(e.clipboardData.getData('text/plain')||'').replace(/\n/g,' '))});
+/* the whole box is one editable area, so selections can span lines; each line is still its own
+   block so it can be fitted. Keep every top-level child a div.line, preserving the caret. */
+function normalize(){
+  const sel=getSelection(), an=sel.anchorNode, ao=sel.anchorOffset;
+  [...stage.childNodes].forEach(n=>{
+    if(n.nodeType===3){
+      if(!n.textContent.length){n.remove();return}
+      const d=document.createElement('div');d.className='line';stage.insertBefore(d,n);d.appendChild(n);
+      if(an===n){const r=document.createRange();r.setStart(n,ao);r.collapse(true);sel.removeAllRanges();sel.addRange(r)}
+    } else if(n.nodeType===1&&n.tagName!=='DIV'){
+      if(n.tagName==='BR'&&stage.childNodes.length>1){n.remove();return}
+      const d=document.createElement('div');d.className='line';stage.insertBefore(d,n);d.appendChild(n);
+    } else if(n.nodeType===1){n.classList.add('line')}
+  });
+  if(!stage.children.length){const d=makeLine('');d.appendChild(document.createElement('br'));stage.appendChild(d)}
+}
+stage.addEventListener('input',()=>{normalize();layout()});
+stage.addEventListener('paste',e=>{e.preventDefault();
+  const lines=(e.clipboardData.getData('text/plain')||'').split(/\r?\n/);
+  lines.forEach((t,i)=>{if(i)document.execCommand('insertParagraph');if(t)document.execCommand('insertText',false,t)})});
 
 const MINFS=()=>Math.max(28,stage.clientWidth*0.045);   // below this, a line wraps instead of shrinking
 function fitLine(el,W){
@@ -145,6 +156,17 @@ function layout(){
     if(S.adapt) fitLine(el,W);
     else{el.style.fontSize='';el.style.whiteSpace='';el.style.width='';el.style.fontVariationSettings=fvs(S.wght,S.wdth)}
   });
+  if(S.adapt){                      // wrapped (long) lines grow until the text fills the box
+    const wrapped=[...stage.children].filter(el=>el.textContent&&el.style.whiteSpace!=='pre');
+    const room=()=>stage.clientHeight-(stage.lastElementChild.getBoundingClientRect().bottom-stage.getBoundingClientRect().top+stage.scrollTop+24);
+    if(wrapped.length&&room()>0){
+      const base=wrapped.map(el=>parseFloat(el.style.fontSize)||40);
+      const apply=f=>wrapped.forEach((el,i)=>{el.style.fontSize=base[i]*f+'px'});
+      let lo=1,hi=8;
+      for(let i=0;i<16;i++){const m=(lo+hi)/2;apply(m);if(room()<0)hi=m;else lo=m}
+      apply(lo);
+    }
+  }
   if(S.adapt){                      // keep the whole text inside the box: shrink everything together if it overflows
     for(let i=0;i<4&&stage.scrollHeight>stage.clientHeight+1;i++){
       const f=Math.max(0.5,(stage.clientHeight-38)/(stage.scrollHeight-38));
@@ -175,9 +197,9 @@ const GROUPS=[
  ['punctuation','.,:;…!¡?¿·•\'"‘’‚“”„‹›«»-–—_()[]{}/\\|¦†‡§¶'],
  ['symbols & maths','+=<>±×÷¬~%‰°#&*@©®™✓✗'],
  ['currency','$¢£¤¥€ƒ'],
- ['accents','^`´¨¯¸ˆ˜'],
- ['accented uppercase','ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠÙÚÛÜÝŸŽÞČĐŊŦ'],
- ['accented lowercase','àáâãäåæçèéêëìíîïıðñòóôõöøœšßùúûüýÿžþµčđŋŧ'],
+ ['accents & modifiers','^`´¨¯¸ˆ˜ʹʼ'],
+ ['accented uppercase','ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠÙÚÛÜÝŸŽÞČĐŊŦƷǮǦǤǨ'],
+ ['accented lowercase','àáâãäåæçèéêëìíîïıðñòóôõöøœšßùúûüýÿžþµčđŋŧʒǯǧǥǩ'],
  ['ligatures',['fi','fl','ff']]];
 const CS=$('charsets');
 for(const [name,chars] of GROUPS){
