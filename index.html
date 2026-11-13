@@ -5,96 +5,126 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
 @font-face{font-family:Stockfleth;src:url(fonts/Stockfleth-VF.woff2) format("woff2"),url(fonts/Stockfleth-VF.ttf) format("truetype");font-weight:100 1000;font-stretch:70% 145%;font-style:normal;font-display:swap}
-:root{--fg:#1f3fd1;--bg:#eef0fb}
-html{transition:none}
+:root{--fg:#1f3fd1;--bg:#eef0fb;--pad:20px;--gut:20px}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--fg)}
 body{font:800 15px/1.45 Stockfleth,ui-monospace,Menlo,monospace;min-height:100vh}
-.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:2px solid var(--fg);
-     display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;padding:12px 20px}
-.grp{display:flex;align-items:center;gap:8px}
+a{color:var(--fg)}
+::selection{background:var(--fg);color:var(--bg)}
+
+/* ---- swiss 8-column grid ------------------------------------------------ */
+.g8{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));column-gap:var(--gut);padding:0 var(--pad)}
+.full{grid-column:1/-1}
+.lab{grid-column:1/3}
+.content{grid-column:3/9;min-width:0}
+
+/* header */
+header.intro{padding-top:22px;padding-bottom:20px;align-items:end}
+.intro h1{grid-column:1/-1;margin:0;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-weight:400;font-variation-settings:"wght" 1000,"wdth" 100;font-size:clamp(56px,9vw,128px);line-height:.85}
+.intro .sub{grid-column:1/-1;margin:14px 0 0;font-size:20px;line-height:25px}
+
+/* controls: label above control, one block per column span */
+div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:2px solid var(--fg);border-bottom:2px solid var(--fg);padding-top:12px;padding-bottom:12px;row-gap:12px;align-items:start}
+.ctl{display:flex;flex-direction:column;gap:7px;min-width:0}
+.ctl .top{display:flex;justify-content:space-between;gap:8px;white-space:nowrap}
+.ctl .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.s-weight{grid-column:1/3}.s-width{grid-column:3/5}.s-style{grid-column:5/7}.s-colour{grid-column:7/8}.s-harm{grid-column:8/9}
 .lbl{font-weight:1000;letter-spacing:.04em}
-input[type=range]{width:150px;accent-color:var(--fg)}
+.val{font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;margin:0;accent-color:var(--fg)}
 input[type=range]:disabled{opacity:.35}
-.val{min-width:34px;font-variant-numeric:tabular-nums}
 button,select{font:inherit;color:var(--fg);background:transparent;border:1.5px solid var(--fg);border-radius:0;padding:5px 10px;cursor:pointer}
-select{-webkit-appearance:none;appearance:none;padding:5px 40px 5px 10px;background-color:transparent;
+select{width:100%;-webkit-appearance:none;appearance:none;padding:5px 32px 5px 10px;background-color:transparent;
   background-image:linear-gradient(45deg,transparent 50%,var(--fg) 50%,var(--fg) calc(50% + 1.6px),transparent calc(50% + 1.6px)),
                    linear-gradient(-45deg,transparent 50%,var(--fg) 50%,var(--fg) calc(50% + 1.6px),transparent calc(50% + 1.6px));
-  background-size:7px 7px,7px 7px;background-position:calc(100% - 20px) 50%,calc(100% - 13px) 50%;background-repeat:no-repeat}
+  background-size:7px 7px,7px 7px;background-position:calc(100% - 18px) 50%,calc(100% - 11px) 50%;background-repeat:no-repeat}
 select option{color:#000;background:#fff}
 button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
-button.b{font-weight:800}button.i{font-style:italic}
-input[type=color]{width:34px;height:28px;padding:0;border:1.5px solid var(--fg);background:none;cursor:pointer}
-.badge{padding:3px 0;font-variant-numeric:tabular-nums}
+button.b{font-weight:1000}button.i{font-style:italic}
+input[type=color]{width:34px;height:30px;padding:0;border:1.5px solid var(--fg);background:none;cursor:pointer}
+.badge{font-variant-numeric:tabular-nums;white-space:nowrap}
 .badge .mk{font-family:Stockfleth,ui-monospace,Menlo,monospace;font-variation-settings:"wght" 700;font-size:1.25em;vertical-align:-.08em;margin-left:.25em}
 .badge.fail{text-decoration:underline;text-underline-offset:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.sep{width:1.5px;align-self:stretch;background:var(--fg);opacity:.25}
-main{padding:22px 20px 10px}
-#stage{border:2px solid var(--fg);padding:16px 16px 22px;height:60vh;min-height:280px;overflow:auto;margin-bottom:22px;scrollbar-width:thin}
+
+/* stage */
+main.g8{padding-top:22px}
+#stage{grid-column:1/-1;border:2px solid var(--fg);padding:16px 16px 22px;height:60vh;min-height:280px;overflow:auto;margin-bottom:34px;scrollbar-width:thin}
 .line{display:block;width:100%;white-space:pre-wrap;overflow-wrap:anywhere;outline:none;font-family:Stockfleth,ui-monospace,Menlo,Consolas,monospace;line-height:1.08;
       font-size:min(12vw,150px);min-height:1.08em;caret-color:var(--fg)}
-.hint{opacity:.7;margin:8px 0 22px}
-h3{font-size:11px;font-weight:700;letter-spacing:.04em;margin:18px 0 8px}h3 span{opacity:.55;font-weight:400}
+
+/* content rows: label in columns 1-2, content in 3-8 */
+.section{grid-column:1/-1;display:grid;grid-template-columns:subgrid;border-top:2px solid var(--fg);padding-top:12px;margin-bottom:26px}
+.section>h2{grid-column:1/-1;font-size:20px;line-height:25px;font-weight:1000;margin:0 0 16px}
+.grow{grid-column:1/-1;display:grid;grid-template-columns:subgrid;margin-bottom:18px}
+.grow h3{grid-column:1/3;font-size:15px;font-weight:1000;margin:0}.grow h3 span{opacity:.55;font-weight:800;margin-left:6px}
+.cells{grid-column:3/9;display:flex;flex-wrap:wrap;padding:2px 0 0 2px}
 .cells.wide div{width:138px}
-.cells{display:flex;flex-wrap:wrap;padding:2px 0 0 2px;margin-bottom:8px}
 .cells div{width:70px;border:2px solid var(--fg);margin:-2px 0 0 -2px;height:124px;padding-top:22px;display:flex;align-items:center;justify-content:center;font-family:Stockfleth,ui-monospace,Menlo,Consolas,monospace;font-size:50px;line-height:1;position:relative;overflow:hidden}
 .cells small{position:absolute;left:0;top:0;right:0;z-index:2;padding:3px 4px;background:var(--bg);font:900 10px Stockfleth,ui-monospace,monospace;color:color-mix(in srgb,var(--fg) 65%,var(--bg))}
-.dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;border-left:1.5px solid var(--fg);border-top:1.5px solid var(--fg);margin:0 0 30px}
-.dl a{display:block;padding:14px 16px;border-right:1.5px solid var(--fg);border-bottom:1.5px solid var(--fg);color:var(--fg);text-decoration:none}
+.dl{grid-column:3/9;display:grid;grid-template-columns:subgrid}
+.dl a{grid-column:span 2;display:block;padding:14px 16px 16px;border:2px solid var(--fg);text-decoration:none;min-height:150px}
 .dl a:hover,.dl a:focus-visible{background:var(--fg);color:var(--bg);outline:none}
-.dl b{display:block;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-size:30px;font-weight:400;font-variation-settings:"wght" 700;margin-bottom:6px}
-.dl span{opacity:.75}
-h2{font-size:12px;font-weight:700;letter-spacing:.04em;margin:0 0 10px}
-footer{border-top:2px solid var(--fg);padding:16px 20px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-footer a{color:var(--fg)}
-@media (max-width:700px){input[type=range]{width:110px}.bar{padding:10px 16px}main{padding:16px}}
-.intro{--h:111px;padding:22px 20px 18px;display:grid;grid-template-columns:auto auto;gap:8px 40px;align-items:start;justify-content:space-between}
-.intro h1{margin:0;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-weight:400;font-variation-settings:"wght" 1000,"wdth" 100;font-size:var(--h);line-height:.9;letter-spacing:0}
-.intro .by{margin:8px 0 0}
-.intro .by a{color:var(--fg)}
-.intro p.pre{margin:0;font-size:20px;font-weight:800;line-height:25px;white-space:nowrap;height:calc(var(--h) * .9);display:flex;flex-direction:column;justify-content:space-between}
-.intro p.pre span{display:block}
-@media (max-width:1400px){.intro{--h:clamp(48px,10vw,111px);grid-template-columns:1fr}.intro p.pre{font-size:20px;line-height:25px;white-space:normal;height:auto;display:block}.intro p.pre span{display:inline}.intro p.pre span::after{content:" "}}
-::selection{background:var(--fg);color:var(--bg)}
+.dl b{display:block;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-size:30px;font-weight:400;font-variation-settings:"wght" 900;margin-bottom:10px}
+
+/* footer on the same columns */
+footer.g8{border-top:2px solid var(--fg);padding-top:18px;padding-bottom:30px;row-gap:20px}
+footer p{margin:0}
+.f1{grid-column:1/3}.f2{grid-column:3/6}.f3{grid-column:6/8}.f4{grid-column:8/9}
+footer .k{font-weight:1000}
+
+/* tablet: 4 columns */
+@media (max-width:1100px){
+  .g8,.section,.grow,.dl{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .s-weight{grid-column:1/3}.s-width{grid-column:3/5}.s-style{grid-column:1/3}.s-colour{grid-column:3/4}.s-harm{grid-column:4/5}
+  .grow h3,.cells{grid-column:1/-1}.grow h3{margin-bottom:8px}
+  .dl{grid-column:1/-1}.dl a{grid-column:span 2}
+  .f1{grid-column:1/3}.f2{grid-column:3/5}.f3{grid-column:1/3}.f4{grid-column:3/5}
+}
+/* phone: 2 columns */
+@media (max-width:640px){
+  :root{--pad:16px;--gut:14px}
+  .g8,.section,.grow,.dl{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .s-weight,.s-width,.s-style{grid-column:1/-1}.s-colour{grid-column:1/2}.s-harm{grid-column:2/3}
+  .dl a{grid-column:1/-1;min-height:0}
+  .f1,.f2,.f3,.f4{grid-column:1/-1}
+  .bar{position:static}
+}
 </style></head><body>
-<header class="intro">
-  <div><h1>stockfleth</h1><p class="by">font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p></div>
-  <p class="pre"><span>a mono font drawn line by line on a 5 × 9 grid.</span><span>variable and adaptive: weight, width, italic.</span><span>for code and for display.</span><span>fluent in the nordic and latin-script sámi languages.</span></p>
+<header class="g8 intro">
+  <h1>stockfleth</h1>
+  <p class="sub">variable and adaptive mono font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </header>
-<div class="bar" role="toolbar" aria-label="stockfleth controls">
-  <div class="grp"><span class="lbl">weight</span><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"><span class="val" id="wghtv">400</span></div>
-  <div class="grp"><span class="lbl">width</span><input id="wdth" type="range" min="70" max="145" value="100" aria-label="width"><span class="val" id="wdthv">100</span></div>
-  <div class="grp">
+<div class="g8 bar" role="toolbar" aria-label="stockfleth controls">
+  <div class="ctl s-weight"><div class="top"><span class="lbl">weight</span><span class="val" id="wghtv">400</span></div><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"></div>
+  <div class="ctl s-width"><div class="top"><span class="lbl">width</span><span class="val" id="wdthv">100</span></div><input id="wdth" type="range" min="70" max="145" value="100" aria-label="width"></div>
+  <div class="ctl s-style"><div class="top"><span class="lbl">style</span></div><div class="row">
     <button class="i" id="ital" aria-pressed="false" title="italic (⌘/ctrl+i)">italic</button>
     <button class="b" id="bold" aria-pressed="false" title="bold (⌘/ctrl+b)">bold</button>
-    <button id="adapt" aria-pressed="true" title="each line stretches and scales to fill the box">adaptive</button>
-  </div>
-  <span class="sep"></span>
-  <div class="grp"><span class="lbl">text</span><input id="fg" type="color" value="#1f3fd1" aria-label="text colour">
-    <span class="lbl">bg</span><input id="bg" type="color" value="#f4f1ea" aria-label="background colour">
-    <button id="swap" title="swap text and background" aria-label="swap text and background"><svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" style="display:block"><path d="M1 4.5h16M13.5 1l3.5 3.5-3.5 3.5M19 9.5H3M6.5 6L3 9.5 6.5 13" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="square"/></svg></button></div>
-  <div class="grp"><span class="lbl">harmony</span>
+    <button id="adapt" aria-pressed="true" title="each line stretches and scales to fill the box">adaptive</button></div></div>
+  <div class="ctl s-colour"><div class="top"><span class="lbl">text · bg</span></div><div class="row">
+    <input id="fg" type="color" value="#1f3fd1" aria-label="text colour"><input id="bg" type="color" value="#f4f1ea" aria-label="background colour">
+    <button id="swap" title="swap text and background" aria-label="swap text and background"><svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" style="display:block"><path d="M1 4.5h16M13.5 1l3.5 3.5-3.5 3.5M19 9.5H3M6.5 6L3 9.5 6.5 13" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="square"/></svg></button></div></div>
+  <div class="ctl s-harm"><div class="top"><span class="lbl">harmony</span></div>
     <select id="mode" aria-label="colour harmony"><option value="free">free</option><option value="analogous" selected>analogous</option><option value="complementary">complementary</option></select>
     <span class="badge" id="ratio">—</span></div>
 </div>
 
-<main>
+<main class="g8">
   <div id="stage" aria-label="type here" contenteditable="true" spellcheck="false"></div>
-  <h2>characters</h2>
-  <div id="charsets"></div>
-  <h2 id="download">download</h2>
-  <div class="dl">
-    <a href="fonts/Stockfleth-VF.ttf" download><b>variable ttf</b><span>one file, every weight · width · italic. for figma, adobe, macos, windows.</span></a>
-    <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (36 kb).</span></a>
-    <a href="fonts/Stockfleth-static-otf.zip" download><b>static otf</b><span>20 styles, hairline → ultra, upright + italic. for apps without variable font support.</span></a>
-  </div>
+  <section class="section" aria-labelledby="h-chars"><h2 id="h-chars">characters</h2><div id="charsets" style="display:contents"></div></section>
+  <section class="section" aria-labelledby="download"><h2 class="lab" id="download" style="grid-column:1/3">download</h2>
+    <div class="dl">
+      <a href="fonts/Stockfleth-VF.ttf" download><b>variable ttf</b><span>one file, every weight, width and italic. for figma, adobe, macos, windows.</span></a>
+      <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (36 kb).</span></a>
+      <a href="fonts/Stockfleth-static-otf.zip" download><b>static otf</b><span>20 styles, hairline to ultra, upright and italic. for apps without variable font support.</span></a>
+    </div></section>
 </main>
-<footer>
-  <span>stockfleth · 238 characters · wght 100–1000 · wdth 70–145 · italic</span>
-  <span>free for personal and trial use · commercial use needs a licence · <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">read the licence</a></span>
-  <span>by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></span>
+<footer class="g8">
+  <p class="f1"><span class="k">stockfleth</span><br>238 characters<br>wght 100–1000 · wdth 70–145<br>italic · strictly monospaced</p>
+  <p class="f2">a mono font drawn line by line on a 5 × 9 grid.<br>variable and adaptive: weight, width, italic.<br>for code and for display.<br>fluent in the nordic and latin-script sámi languages.</p>
+  <p class="f3">free for personal and trial use.<br>commercial use needs a licence.<br><a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">read the licence</a></p>
+  <p class="f4">by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </footer>
 
 <script>
@@ -204,12 +234,13 @@ const GROUPS=[
 const CS=$('charsets');
 for(const [name,chars] of GROUPS){
   const list=Array.isArray(chars)?chars:[...chars];
-  const h=document.createElement('h3');h.innerHTML=name+' <span>'+list.length+'</span>';CS.appendChild(h);
+  const row=document.createElement('div');row.className='grow';CS.appendChild(row);
+  const h=document.createElement('h3');h.innerHTML=name+'<span>'+list.length+'</span>';row.appendChild(h);
   const g=document.createElement('div');g.className='cells'+(Array.isArray(chars)?' wide':'');
   for(const c of list){const d=document.createElement('div');
     const code=c.length===1?'u+'+c.codePointAt(0).toString(16).padStart(4,'0'):'liga';
     d.innerHTML='<small>'+code+'</small>';d.appendChild(document.createTextNode(c));g.appendChild(d)}
-  CS.appendChild(g)}
+  row.appendChild(g)}
 
 /* ---------------- colour: harmony + guaranteed contrast ---------------- */
 const hex2rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
