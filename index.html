@@ -368,7 +368,7 @@ function refreshColours(){
   if(contrast(FG,BG)<TARGET){FG=lum(BG)>.18?[17,17,17]:[245,245,245]}
   apply();
   $('colour-status').textContent=fam.name+', '+harmony+', contrast '+contrast(FG,BG).toFixed(1)+' to 1';
-  $('colourv').textContent=fam.name.replace('black and grey','greys')+' · '+harmony;
+  $('colourv').textContent=fam.name.replace('black and grey','greys')+' ('+harmony+')';
 }
 function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
