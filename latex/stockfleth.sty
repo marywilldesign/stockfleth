@@ -1,0 +1,61 @@
+%% stockfleth.sty -- Stockfleth mono font for XeLaTeX and LuaLaTeX
+%% (c) 2026 marywildesign. Free for personal and trial use; see LICENSE.md.
+%%
+%% Usage:   \usepackage{stockfleth}              % Stockfleth as the typewriter (\ttfamily) font
+%%          \usepackage[main]{stockfleth}        % ...and as the main text font too
+%%          \usepackage[ligatures]{stockfleth}   % keep the fi / fl / ff pairs (off by default for code)
+%%
+%% Weights: \fontseries{ul} hairline, el thin, l light, m regular, mb medium, sb semibold,
+%%          b bold, eb extrabold, ub black; \stockflethultra for the heaviest cut.
+%% Needs the Stockfleth-*.otf files next to your .tex file or installed (TEXMF or system fonts).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{stockfleth}[2026/11/13 v1.0 Stockfleth mono font (XeLaTeX/LuaLaTeX)]
+
+\RequirePackage{iftex}
+\ifTUTeX\else
+  \PackageError{stockfleth}{Stockfleth needs XeLaTeX or LuaLaTeX}
+    {Compile with xelatex or lualatex (pdfLaTeX cannot read OpenType fonts directly).}
+\fi
+\RequirePackage{fontspec}
+
+\newif\ifstockfleth@main   \stockfleth@mainfalse
+\newif\ifstockfleth@liga   \stockfleth@ligafalse
+\DeclareOption{main}{\stockfleth@maintrue}
+\DeclareOption{ligatures}{\stockfleth@ligatrue}
+\ProcessOptions\relax
+
+\ifstockfleth@liga
+  \def\stockfleth@lig{Ligatures=Common}
+\else
+  \def\stockfleth@lig{Ligatures=NoCommon}
+\fi
+
+% one definition of the family, reused for every command below
+\edef\stockfleth@features{%
+  Extension      = .otf,
+  UprightFont    = *-Regular,
+  ItalicFont     = *-Italic,
+  BoldFont       = *-Bold,
+  BoldItalicFont = *-BoldItalic,
+  FontFace = {ul}{n}{*-Hairline},   FontFace = {ul}{it}{*-HairlineItalic},
+  FontFace = {el}{n}{*-Thin},       FontFace = {el}{it}{*-ThinItalic},
+  FontFace = {l}{n}{*-Light},       FontFace = {l}{it}{*-LightItalic},
+  FontFace = {mb}{n}{*-Medium},     FontFace = {mb}{it}{*-MediumItalic},
+  FontFace = {sb}{n}{*-Semibold},   FontFace = {sb}{it}{*-SemiboldItalic},
+  FontFace = {eb}{n}{*-Extrabold},  FontFace = {eb}{it}{*-ExtraboldItalic},
+  FontFace = {ub}{n}{*-Black},      FontFace = {ub}{it}{*-BlackItalic},
+  \stockfleth@lig}
+
+\def\stockfleth@load#1{\expandafter#1\expandafter{\stockfleth@features}}
+\def\stockfleth@setmono#1{\setmonofont{Stockfleth}[#1]}
+\def\stockfleth@setmain#1{\setmainfont{Stockfleth}[#1]}
+\def\stockfleth@newfam#1{\newfontfamily\stockflethfamily{Stockfleth}[#1]}
+
+\stockfleth@load\stockfleth@setmono
+\stockfleth@load\stockfleth@newfam
+\ifstockfleth@main \stockfleth@load\stockfleth@setmain \fi
+
+\newfontfamily\stockflethultra{Stockfleth-Ultra}[Extension=.otf, ItalicFont=Stockfleth-UltraItalic]
+\DeclareTextFontCommand{\textstockfleth}{\stockflethfamily}
+
+\endinput
