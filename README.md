@@ -10,9 +10,9 @@ A mono font drawn line by line on a 5 × 9 grid: variable, and fluent in the Nor
 |---|---|---|
 | weight | `wght` | 100–1000 |
 | width | `wdth` | 70–145 |
-| italic (slant) | `slnt` | 0 to −12° |
+| *italic* (slant) | `slnt` | 0 to −12° |
 
-Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold, Black, Ultra, each upright and italic.
+Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold, Black, Ultra, each upright and *italic*.
 
 ## Character set
 
