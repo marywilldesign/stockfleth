@@ -65,9 +65,11 @@ div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px soli
 .s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:5/7}.s-size{grid-column:7/9}
 .intro h1{grid-row:1}
 .colour{grid-column:7/9;grid-row:1;align-self:start;justify-self:end;text-align:right;font-size:20px;line-height:25px;white-space:nowrap}
-.colour .ctop{display:flex;justify-content:flex-end;align-items:center;gap:10px}
-#refresh{border:0;background:none;padding:0 2px;height:auto;font-size:28px;line-height:25px;font-variation-settings:"wght" 700,"wdth" 100;color:var(--fg);cursor:pointer;transition:transform .25s}
-#refresh:hover,#refresh:focus-visible{transform:rotate(45deg)}
+.colour{display:flex;align-items:center;gap:12px}
+#refresh{border:0;background:none;padding:0;height:auto;font-size:28px;line-height:1;transform-origin:.3em .611em;font-variation-settings:"wght" 700,"wdth" 100;color:var(--fg);cursor:pointer;--r:0deg;transform:rotate(var(--r));transition:transform .3s}
+/* hover: a quarter turn to the right; click: on round the rest of the circle as the colours change */
+#refresh:hover:not(.spun),#refresh:focus-visible:not(.spun){transform:rotate(calc(var(--r) + 90deg))}
+#refresh.spun{transition:transform .5s}
 .chip{height:22px;padding:0 8px;font-size:12px;margin:0 auto 0 10px;letter-spacing:.06em}
 .ctl .rng.auto input,.ctl .rng.auto .tick,.ctl .rng.auto::after{opacity:.4}
 .lbl,.val,.badge,.sub,.section>h2,.grow h3,footer.g8,.dl a span,.cap{text-transform:uppercase;letter-spacing:.06em}
@@ -147,7 +149,7 @@ footer .k{font-weight:1000}
 </style><noscript><style>html.loading body{visibility:visible}</style></noscript></head><body>
 <header class="g8 intro">
   <h1>stockfleth™</h1>
-  <div class="colour"><div class="ctop"><span class="lbl">colour</span><button id="refresh" aria-label="next colour pairing" title="next colour pairing">↻</button></div><span id="colourv"></span><span class="sr" id="colour-status" aria-live="polite"></span></div>
+  <div class="colour"><span id="colourv"></span><button id="refresh" aria-label="next colour pairing" title="next colour pairing">↻</button><span class="sr" id="colour-status" aria-live="polite"></span></div>
   <p class="sub">variable mono font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </header>
 <div class="g8 bar" role="toolbar" aria-label="stockfleth controls">
@@ -371,7 +373,9 @@ function refreshColours(){
 function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
 }
-$('refresh').onclick=refreshColours;
+let turns=0;
+$('refresh').onclick=e=>{const b=e.currentTarget; turns++; b.classList.add('spun'); b.style.setProperty('--r',turns*360+'deg'); refreshColours()};
+$('refresh').onmouseleave=$('refresh').onblur=e=>e.currentTarget.classList.remove('spun');
 lastFam=Math.floor(Math.random()*FAMILIES.length); refreshColours();
 /* reveal the page only once Stockfleth is ready, so no other font is ever shown */
 const reveal=()=>document.documentElement.classList.remove('loading');
