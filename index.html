@@ -67,9 +67,9 @@ div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px soli
 .colour{grid-column:7/9;grid-row:1;align-self:start;justify-self:end;text-align:right;font-size:20px;line-height:25px;white-space:nowrap}
 .colour{display:flex;align-items:center;gap:12px}
 #refresh{border:0;background:none;padding:0;height:auto;font-size:28px;line-height:1;transform-origin:.3em .611em;font-variation-settings:"wght" 700,"wdth" 100;color:var(--fg);cursor:pointer;--r:0deg;transform:rotate(var(--r));transition:transform .3s}
-/* hover: a quarter turn to the right; click: on round the rest of the circle as the colours change */
+/* the arrow turns in quarter steps: hover previews the next quarter turn, a click commits it (and changes the colours) */
 #refresh:hover:not(.spun),#refresh:focus-visible:not(.spun){transform:rotate(calc(var(--r) + 90deg))}
-#refresh.spun{transition:transform .5s}
+#refresh.spun{transition:transform .3s}
 .chip{height:22px;padding:0 8px;font-size:12px;margin:0 auto 0 10px;letter-spacing:.06em}
 .ctl .rng.auto input,.ctl .rng.auto .tick,.ctl .rng.auto::after{opacity:.4}
 .lbl,.val,.badge,.sub,.section>h2,.grow h3,footer.g8,.dl a span,.cap{text-transform:uppercase;letter-spacing:.06em}
@@ -308,7 +308,7 @@ for(const [name,chars] of GROUPS){
   const h=document.createElement('h3');h.innerHTML=name+'<span>('+list.length+')</span>';row.appendChild(h);
   const g=document.createElement('div');g.className='cells'+(Array.isArray(chars)?' wide':'');
   for(const c of list){const d=document.createElement('div');
-    const code=c.length===1?'u+'+c.codePointAt(0).toString(16).padStart(4,'0'):'liga';
+    const code=c.length===1?'u+'+c.codePointAt(0).toString(16).padStart(4,'0'):(c[0]==='f'?'liga':'calt');   // OpenType feature: standard ligatures / contextual alternates
     d.innerHTML='<small>'+code+'</small>';d.appendChild(document.createTextNode(c));g.appendChild(d)}
   row.appendChild(g)}
 
@@ -377,7 +377,7 @@ function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
 }
 let turns=0;
-$('refresh').onclick=e=>{const b=e.currentTarget; turns++; b.classList.add('spun'); b.style.setProperty('--r',turns*360+'deg'); refreshColours()};
+$('refresh').onclick=e=>{const b=e.currentTarget; turns++; b.classList.add('spun'); b.style.setProperty('--r',turns*90+'deg'); refreshColours()};
 $('refresh').onmouseleave=$('refresh').onblur=e=>e.currentTarget.classList.remove('spun');
 lastFam=Math.floor(Math.random()*FAMILIES.length); refreshColours();
 /* reveal the page only once Stockfleth is ready, so no other font is ever shown */
