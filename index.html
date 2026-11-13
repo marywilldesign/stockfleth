@@ -44,8 +44,8 @@ a:not(.dl a):hover{font-weight:1000}
 
 /* header */
 header.intro{padding-top:22px;padding-bottom:20px;align-items:end}
-.intro h1{grid-column:1/-1;margin:0;font-family:Stockfleth;font-weight:400;font-variation-settings:"wght" 1000,"wdth" 100;font-size:clamp(56px,9vw,128px);line-height:.85}
-.intro .sub{grid-column:1/-1;margin:14px 0 0;font-size:20px;line-height:25px}
+.intro h1{grid-column:1/-1;margin:0;font-family:Stockfleth;font-weight:400;font-variation-settings:"wght" 1000,"wdth" 100;font-size:clamp(56px,9vw,128px);line-height:1.25;margin-top:-.2em}
+.intro .sub{grid-column:1/-1;margin:0;font-size:20px;line-height:25px}
 
 /* controls: label above control, one block per column span */
 div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px solid var(--fg);border-bottom:1px solid var(--fg);padding-top:12px;padding-bottom:12px;row-gap:12px;align-items:start}
@@ -368,7 +368,8 @@ function refreshColours(){
   if(contrast(FG,BG)<TARGET){FG=lum(BG)>.18?[17,17,17]:[245,245,245]}
   apply();
   $('colour-status').textContent=fam.name+', '+harmony+', contrast '+contrast(FG,BG).toFixed(1)+' to 1';
-  $('colourv').textContent=fam.name.replace('black and grey','greys')+' ('+harmony+')';
+  const hex=c=>'#'+c.map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
+  $('colourv').textContent=hex(FG)+' on '+hex(BG)+' ('+harmony+')';   // the actual colours, not the family they were drawn from
 }
 function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
