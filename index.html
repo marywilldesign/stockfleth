@@ -143,11 +143,15 @@ footer .k{font-weight:1000}
   :root{--pad:16px;--gut:14px}
   .g8,.section,.grow,.dl{grid-template-columns:repeat(2,minmax(0,1fr))}
   .s-weight,.s-width,.s-slant,.s-size{grid-column:1/-1}
-  .colour{white-space:normal;font-size:16px;line-height:21px;justify-self:stretch;justify-content:flex-end}
+  .colour{display:block;white-space:normal;font-size:16px;line-height:21px;justify-self:start;text-align:left;grid-row:3;margin-top:14px}
+  .colour #refresh{font-size:22px;margin-left:10px;vertical-align:-3px}   /* inline: follows the last word when the line wraps */
+  .intro h1{grid-row:1}.intro .sub{grid-row:2}
   .dl a{grid-column:1/-1;min-height:0}
   footer.g8{flex-direction:column}
-  .bar{position:static}
+  div.bar{position:static}
 }
+/* short screens (a phone on its side): the controls scroll away too */
+@media (max-height:500px){div.bar{position:static}}
 </style><noscript><style>html.loading body{visibility:visible}</style></noscript></head><body>
 <header class="g8 intro">
   <h1>stockfleth™</h1>
@@ -174,7 +178,7 @@ footer .k{font-weight:1000}
 <footer class="g8">
   <p class="f1"><span class="k">stockfleth:</span><br>characters (251)<br><span class="nw">wght (100–1000) ·</span> <span class="nw">wdth (70–145)</span><br><em class="it">italic</em>, mono</p>
   <p class="f2"><span class="nw">a mono font drawn line by line</span> <span class="nw">on a 5 × 9 grid.</span><br><span class="nw">variable: weight,</span> <span class="nw">width, <em class="it">italic</em>.</span><br><span class="nw">good for display</span> <span class="nw">and tech docs.</span><br><span class="nw">fluent in the nordic and</span> <span class="nw">latin-script sámi languages.</span></p>
-  <p class="f3"><span class="nw">free for personal</span> <span class="nw">and trial use.</span><br><span class="nw"><a href="https://marywildesign.com" rel="noopener">contact me</a></span> <span class="nw">for commercial use.</span><br>read the <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">licence</a><br>© 2026 <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
+  <p class="f3"><span class="nw">free for personal</span> <span class="nw">and trial use.</span><br><span class="nw"><a href="mailto:marywildesign@gmail.com?subject=Stockfleth%20commercial%20licence">contact me</a></span> <span class="nw">for commercial use.</span><br>read the <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">licence</a><br>© 2026 <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </footer>
 
 <script>
