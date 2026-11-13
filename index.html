@@ -93,6 +93,11 @@ main.g8{padding-top:22px}
 .line{display:block;width:100%;white-space:pre-wrap;overflow-wrap:anywhere;outline:none;font-family:Stockfleth;
       /* 1.26: every descender (j, g, p, y, ŋ) and accent sits inside its own line box, so highlighting never clips glyphs */
       line-height:1.26;font-size:min(12vw,150px);min-height:1.26em;caret-color:var(--fg)}
+/* affordance: a blinking caret after the text until someone clicks in */
+@keyframes sfblink{50%{opacity:0}}
+#stage:not(:focus) .line:last-child::after{content:"";display:inline-block;width:.055em;height:.95em;margin-left:.05em;
+  vertical-align:-.13em;background:var(--fg);animation:sfblink 1.06s steps(1) infinite}
+@media (prefers-reduced-motion:reduce){#stage:not(:focus) .line:last-child::after{animation:none}}
 
 /* content rows: label in columns 1-2, content in 3-8 */
 .section{grid-column:1/-1;display:grid;grid-template-columns:subgrid;border-top:1px solid var(--fg);padding-top:12px;margin-bottom:26px}
