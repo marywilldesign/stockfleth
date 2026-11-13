@@ -128,6 +128,10 @@ main.g8{padding-top:22px}
 /* footer on the same columns */
 footer.g8{border-top:1px solid var(--fg);padding-top:18px;padding-bottom:30px;display:flex;justify-content:space-between;gap:20px var(--gut)}
 footer p{margin:0}
+/* paragraph tester: every downloadable style, at any size */
+.tester .tbar{grid-column:3/9;display:grid;grid-template-columns:subgrid;row-gap:12px;margin-bottom:22px}
+.t-style{grid-column:1/3}.t-size{grid-column:3/5}
+#tpara{grid-column:3/9;margin:0 0 8px;font-family:Stockfleth;font-size:14px;line-height:max(1.26em,calc(1.15em + 5px));max-width:100%;overflow-wrap:anywhere}
 .nw{white-space:nowrap}
 
 footer .k{font-weight:1000}
@@ -136,6 +140,7 @@ footer .k{font-weight:1000}
 @media (max-width:1100px){
   .g8,.section,.grow,.dl{grid-template-columns:repeat(4,minmax(0,1fr))}
   .s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:1/3}.s-size{grid-column:3/5}
+  .tester .tbar,#tpara{grid-column:1/-1}
   .colour{grid-column:1/-1}.intro h1{grid-row:2}.intro .sub{grid-row:3}
   .grow h3,.cells{grid-column:1/-1}.grow h3{margin-bottom:8px}
   .dl{grid-column:1/-1}.dl a{grid-column:span 2}
@@ -146,6 +151,7 @@ footer .k{font-weight:1000}
   :root{--pad:16px;--gut:14px}
   .g8,.section,.grow,.dl{grid-template-columns:repeat(2,minmax(0,1fr))}
   .s-weight,.s-width,.s-slant,.s-size{grid-column:1/-1}
+  .t-style,.t-size{grid-column:1/-1}
   .colour{white-space:normal;font-size:16px;line-height:21px;justify-self:start;justify-content:flex-start;align-items:center;text-align:left;grid-row:3;margin-top:14px;gap:14px}
   .colour #refresh{order:-1;font-size:34px}   /* on a phone the arrow comes first and bigger, right under the thumb */
   .intro h1{grid-row:1}.intro .sub{grid-row:2}
@@ -171,6 +177,12 @@ footer .k{font-weight:1000}
 <main class="g8">
   <div id="stage" role="textbox" aria-multiline="true" aria-label="type here to test the font" contenteditable="true" spellcheck="false"></div>
   <section class="section" aria-labelledby="h-chars"><h2 id="h-chars">characters</h2><div id="charsets" style="display:contents"></div></section>
+  <section class="section tester" aria-labelledby="h-text"><h2 class="lab" id="h-text">paragraph</h2>
+    <div class="tbar">
+      <div class="ctl t-style"><div class="top"><span class="lbl">style</span></div><select id="tstyle" aria-label="style"></select></div>
+      <div class="ctl t-size"><div class="top"><span class="lbl">size</span><span class="val" id="tsizev">14px</span></div><div class="rng" data-marks="12,16,24,32,40"><input id="tsize" type="range" min="8" max="48" value="14" aria-label="paragraph size in pixels"></div></div>
+    </div>
+    <p id="tpara">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p></section>
   <section class="section" aria-labelledby="download"><h2 class="lab" id="download" style="grid-column:1/3">download <span aria-hidden="true">↘</span></h2>
     <div class="dl">
       <a href="fonts/Stockfleth-VF.ttf" download><b>variable ttf</b><span>one file, every weight, width and <em class="it">italic</em>. for figma, adobe, macos, windows.</span></a>
@@ -383,6 +395,15 @@ function refreshColours(){
 function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
 }
+/* ---------------- paragraph tester: the 20 static styles (cut from the variable font at width 100) ---------------- */
+const STYLES=[[100,'hairline'],[200,'thin'],[300,'light'],[400,'regular'],[500,'medium'],[600,'semibold'],[700,'bold'],[800,'extrabold'],[900,'black'],[1000,'ultra']];
+STYLES.forEach(([w,n])=>[0,12].forEach(sl=>{const o=document.createElement('option');o.value=w+','+sl;
+  o.textContent=sl?(n==='regular'?'italic':n+' italic'):n; if(w===400&&!sl)o.selected=true; $('tstyle').appendChild(o)}));
+function tester(){const [w,sl]=$('tstyle').value.split(',').map(Number), fs=+$('tsize').value, p=$('tpara');
+  p.style.fontVariationSettings=`"wght" ${w}, "wdth" 100, "slnt" ${-sl}`; p.style.fontSize=fs+'px';
+  $('tsizev').textContent=fs+'px'; fillTo($('tsize'))}
+$('tstyle').onchange=tester; $('tsize').oninput=e=>{snap(e.target);tester()}; tester();
+
 let turns=0;
 $('refresh').onclick=e=>{const b=e.currentTarget; turns++; b.classList.add('spun'); b.style.setProperty('--r',turns*90+'deg'); refreshColours()};
 $('refresh').onmouseleave=$('refresh').onblur=e=>e.currentTarget.classList.remove('spun');
