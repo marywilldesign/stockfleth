@@ -95,8 +95,8 @@ main.g8{padding-top:22px}
       line-height:1.26;font-size:min(12vw,150px);min-height:1.26em;caret-color:var(--fg)}
 /* affordance: a blinking caret after the text until someone clicks in */
 @keyframes sfblink{50%{opacity:0}}
-#stage:not(:focus) .line:last-child::after{content:"";display:inline-block;width:.055em;height:.95em;margin-left:.05em;
-  vertical-align:-.13em;background:var(--fg);animation:sfblink 1.06s steps(1) infinite}
+#stage:not(:focus) .line:last-child::after{content:"";display:inline-block;width:1px;height:1.25em;margin-left:.04em;
+  vertical-align:-.21em;background:var(--fg);animation:sfblink 1.06s steps(1) infinite}
 @media (prefers-reduced-motion:reduce){#stage:not(:focus) .line:last-child::after{animation:none}}
 
 /* content rows: label in columns 1-2, content in 3-8 */
