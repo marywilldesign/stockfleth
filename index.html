@@ -176,7 +176,7 @@ footer .k{font-weight:1000}
 <div class="g8 bar" role="toolbar" aria-label="stockfleth controls">
   <div class="ctl s-weight"><div class="top"><span class="lbl">weight</span><span class="val" id="wghtv">400</span></div><div class="rng" data-marks="200,300,400,500,600,700,800,900"><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"></div></div>
   <div class="ctl s-slant"><div class="top"><span class="lbl">slant</span><span class="val" id="slntv">0°</span></div><div class="rng" data-marks="3,6,9"><input id="slnt" type="range" min="0" max="12" step="0.5" value="0" aria-label="slant in degrees"></div></div>
-  <div class="ctl s-width"><div class="top"><span class="lbl">width</span><span class="val" id="wdthv">100</span></div><div class="rng" data-marks="75,87.5,100,112.5,125"><input id="wdth" type="range" min="70" max="145" value="100" aria-label="width"></div></div>
+  <div class="ctl s-width"><div class="top"><span class="lbl">width</span><span class="val" id="wdthv">100</span></div><div class="rng" data-marks="75,87.5,100,112.5,125"><input id="wdth" type="range" min="70" max="145" step="0.5" value="100" aria-label="width"></div></div>
   <div class="ctl s-size"><div class="top"><span class="lbl">size</span><button class="chip" id="adapt" aria-pressed="true" title="fit: every line scales and stretches to fill the box. drag size or width to set them yourself.">fit</button><span class="val" id="sizev"></span></div><div class="rng" data-marks="48,96,144,192,240"><input id="size" type="range" min="12" max="300" value="120" aria-label="size in pixels"></div></div>
 </div>
 
@@ -257,13 +257,26 @@ function stretchAt(el,W,fs){   // fixed size: let the width axis alone fill the 
   let lo=70,hi=145; if(set(hi)<=W){lo=hi} else for(let i=0;i<14;i++){const m=(lo+hi)/2; if(set(m)>W) hi=m; else lo=m}
   set(lo); if(el.scrollWidth>W+1){el.style.whiteSpace=''} el.style.width='';
 }
+// sliders with markers: the track is split into equal steps from marker to marker, so the markers sit
+// evenly even when their values don't (width runs 70, 75, 87.5 ... 125, 145). the input itself moves through
+// positions 0, 100, 200 ... one hundred per step; toPos / fromPos convert between position and real value.
+const KNOTS=new Map();   // input -> {k: [min, ...markers, max], step}
+function toPos(el,v){const {k}=KNOTS.get(el); v=Math.min(k[k.length-1],Math.max(k[0],v));
+  let i=0; while(i<k.length-2&&v>k[i+1])i++;
+  return (i+(v-k[i])/(k[i+1]-k[i]))*100}
+function fromPos(el,p){const {k,step}=KNOTS.get(el); const i=Math.min(Math.floor(p/100),k.length-2);
+  const v=k[i]+(p/100-i)*(k[i+1]-k[i]); return Math.round(v/step)*step}
+const getVal=el=>fromPos(el,+el.value), setVal=(el,v)=>{el.value=toPos(el,v)};
 function fillTo(el){
   el.style.setProperty('--p',(el.value-el.min)/(el.max-el.min)*100+'%');
-  el.parentElement.querySelectorAll('.tick').forEach(t=>t.classList.toggle('on',+el.value>=+t.dataset.v));
+  el.parentElement.querySelectorAll('.tick').forEach(t=>t.classList.toggle('on',+el.value>=+t.dataset.p));
 }
 document.querySelectorAll('.rng[data-marks]').forEach(r=>{const el=r.querySelector('input');
-  r.dataset.marks.split(',').forEach(v=>{const t=document.createElement('span');t.className='tick';t.dataset.v=v;
-    const p=(v-el.min)/(el.max-el.min);t.style.left=`calc(7px + (100% - 14px) * ${p})`;r.appendChild(t)})});
+  const k=[+el.min,...r.dataset.marks.split(',').map(Number),+el.max], v0=+el.getAttribute('value');
+  KNOTS.set(el,{k,step:+(el.getAttribute('step')||1)});
+  el.min=0; el.max=(k.length-1)*100; el.step='any'; setVal(el,v0);
+  k.slice(1,-1).forEach((v,i)=>{const t=document.createElement('span');t.className='tick';t.dataset.p=(i+1)*100;   // one marker per step
+    t.style.left=`calc(7px + (100% - 14px) * ${(i+1)/(k.length-1)})`;r.appendChild(t)})});
 function autoVals(){   // the size and width auto chose for the first line, for the dimmed sliders
   const l=stage.firstElementChild, m=l&&l.style.fontVariationSettings.match(/"wdth" ([\d.]+)/);
   return {size:Math.round(Math.min(300,Math.max(12,parseFloat(l&&l.style.fontSize)||120))), wdth:m?Math.round(+m[1]):100}}
@@ -291,18 +304,18 @@ function layout(){
     }
   }
   document.querySelectorAll('.cells div').forEach(c=>c.style.fontVariationSettings=fvs(S.wght,S.wdth));
-  $('wghtv').textContent=S.wght; $('wght').value=S.wght;
-  $('wdth').parentElement.classList.toggle('auto',S.adapt); const A=S.adapt?autoVals():S; $('wdthv').textContent=S.adapt?'':S.wdth; $('wdth').value=A.wdth;
-  $('size').parentElement.classList.toggle('auto',S.adapt); $('sizev').textContent=S.adapt?'':S.size+'px'; $('size').value=A.size;
+  $('wghtv').textContent=S.wght; setVal($('wght'),S.wght);
+  $('wdth').parentElement.classList.toggle('auto',S.adapt); const A=S.adapt?autoVals():S; $('wdthv').textContent=S.adapt?'':S.wdth; setVal($('wdth'),A.wdth);
+  $('size').parentElement.classList.toggle('auto',S.adapt); $('sizev').textContent=S.adapt?'':S.size+'px'; setVal($('size'),A.size);
   $('slntv').textContent=S.slnt+'°'; $('adapt').setAttribute('aria-pressed',S.adapt);
   document.querySelectorAll('input[type=range]').forEach(fillTo);
 }
 // within 4% of the top of its range, the dot snaps into the ring at the end
-function snap(el){const lo=+el.min,hi=+el.max,v=+el.value;
-  if(hi-v<=(hi-lo)*0.04){el.value=hi;return hi}                       // into the end ring
-  const marks=(el.parentElement.dataset.marks||'').split(',').filter(Boolean).map(Number);
-  for(const m of marks){if(Math.abs(v-m)<=(hi-lo)*0.015){el.value=m;return +el.value}}   // gently onto a marker
-  return v}
+function snap(el){const hi=+el.max,p=+el.value;
+  if(hi-p<=hi*0.04){el.value=hi;return fromPos(el,hi)}                 // into the end ring
+  const m=Math.round(p/100)*100;
+  if(Math.abs(p-m)<=hi*0.015){el.value=m;return fromPos(el,m)}        // gently onto a marker
+  return fromPos(el,p)}
 $('wght').oninput=e=>{S.wght=snap(e.target);layout()};
 // auto fits size and width to the box; taking either slider switches auto off, starting from what auto had chosen
 function manual(){if(!S.adapt)return; const a=autoVals(); S.size=a.size; S.wdth=a.wdth; S.adapt=false}
@@ -401,7 +414,7 @@ function refreshColours(){
   apply();
   $('colour-status').textContent=fam.name+', '+harmony+', contrast '+contrast(FG,BG).toFixed(1)+' to 1';
   const hex=c=>'#'+c.map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
-  $('colourv').innerHTML='<span class="nw">'+hex(FG)+' on '+hex(BG)+'</span> <span class="nw">('+harmony+')</span>';   // the actual colours, not the family they were drawn from
+  $('colourv').textContent=hex(FG)+' on '+hex(BG);   // the actual colours, not the family they were drawn from
 }
 function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
@@ -410,7 +423,7 @@ function apply(){
 const STYLES=[[100,'thin'],[200,'extralight'],[300,'light'],[400,'regular'],[500,'medium'],[600,'semibold'],[700,'bold'],[800,'extrabold'],[900,'black'],[1000,'extrablack']];   // google fonts weight names
 STYLES.forEach(([w,n])=>[0,12].forEach(sl=>{const o=document.createElement('option');o.value=w+','+sl;
   o.textContent=sl?(n==='regular'?'italic':n+' italic'):n; if(w===400&&!sl)o.selected=true; $('tstyle').appendChild(o)}));
-function tester(){const [w,sl]=$('tstyle').value.split(',').map(Number), fs=+$('tsize').value, p=$('tpara');
+function tester(){const [w,sl]=$('tstyle').value.split(',').map(Number), fs=getVal($('tsize')), p=$('tpara');
   p.style.fontVariationSettings=`"wght" ${w}, "wdth" 100, "slnt" ${-sl}`; p.style.fontSize=fs+'px';
   $('tsizev').textContent=fs+'px'; fillTo($('tsize'))}
 document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{
