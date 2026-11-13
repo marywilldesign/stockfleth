@@ -146,8 +146,8 @@ footer .k{font-weight:1000}
   :root{--pad:16px;--gut:14px}
   .g8,.section,.grow,.dl{grid-template-columns:repeat(2,minmax(0,1fr))}
   .s-weight,.s-width,.s-slant,.s-size{grid-column:1/-1}
-  .colour{display:block;white-space:normal;font-size:16px;line-height:21px;justify-self:start;text-align:left;grid-row:3;margin-top:14px}
-  .colour #refresh{font-size:22px;margin-left:10px;vertical-align:-3px}   /* inline: follows the last word when the line wraps */
+  .colour{white-space:normal;font-size:16px;line-height:21px;justify-self:start;justify-content:flex-start;align-items:center;text-align:left;grid-row:3;margin-top:14px;gap:14px}
+  .colour #refresh{order:-1;font-size:34px}   /* on a phone the arrow comes first and bigger, right under the thumb */
   .intro h1{grid-row:1}.intro .sub{grid-row:2}
   .dl a{grid-column:1/-1;min-height:0}
   footer.g8{flex-direction:column}
@@ -171,7 +171,7 @@ footer .k{font-weight:1000}
 <main class="g8">
   <div id="stage" role="textbox" aria-multiline="true" aria-label="type here to test the font" contenteditable="true" spellcheck="false"></div>
   <section class="section" aria-labelledby="h-chars"><h2 id="h-chars">characters</h2><div id="charsets" style="display:contents"></div></section>
-  <section class="section" aria-labelledby="download"><h2 class="lab" id="download" style="grid-column:1/3">download</h2>
+  <section class="section" aria-labelledby="download"><h2 class="lab" id="download" style="grid-column:1/3">download <span aria-hidden="true">↘</span></h2>
     <div class="dl">
       <a href="fonts/Stockfleth-VF.ttf" download><b>variable ttf</b><span>one file, every weight, width and <em class="it">italic</em>. for figma, adobe, macos, windows.</span></a>
       <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (50 kb).</span></a>
