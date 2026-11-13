@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en" class="loading"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>stockfleth</title>
-<meta name="description" content="stockfleth: a variable and adaptive mono font drawn line by line on a 5 × 9 grid. weight, width, italic. fluent in the nordic and latin-script sámi languages. by marywildesign.">
+<meta name="description" content="stockfleth: a variable mono font drawn line by line on a 5 × 9 grid. weight, width, italic. fluent in the nordic and latin-script sámi languages. by marywildesign.">
 <link rel="preload" href="fonts/Stockfleth-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="canonical" href="https://marywildesign.com/stockfleth/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="marywildesign">
-<meta property="og:title" content="stockfleth: variable and adaptive mono font">
-<meta property="og:description" content="a mono font drawn line by line on a 5 × 9 grid. variable and adaptive: weight, width, italic. fluent in the nordic and latin-script sámi languages. by marywildesign.">
+<meta property="og:title" content="stockfleth: variable mono font">
+<meta property="og:description" content="a mono font drawn line by line on a 5 × 9 grid. variable: weight, width, italic. fluent in the nordic and latin-script sámi languages. by marywildesign.">
 <meta property="og:url" content="https://marywildesign.com/stockfleth/">
 <meta property="og:image" content="https://marywildesign.com/stockfleth/og-image.png">
 <meta property="og:image:type" content="image/png">
@@ -16,7 +16,7 @@
 <meta property="og:image:height" content="627">
 <meta property="og:image:alt" content="stockfleth, a variable mono font by marywildesign, set in light blue on deep maroon with the words kult, gøy and koselig">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="stockfleth: variable and adaptive mono font">
+<meta name="twitter:title" content="stockfleth: variable mono font">
 <meta name="twitter:description" content="a mono font drawn line by line on a 5 × 9 grid, by marywildesign.">
 <meta name="twitter:image" content="https://marywildesign.com/stockfleth/og-image.png">
 <style>
@@ -116,7 +116,7 @@ footer .k{font-weight:1000}
 </style><noscript><style>html.loading body{visibility:visible}</style></noscript></head><body>
 <header class="g8 intro">
   <h1>stockfleth</h1>
-  <p class="sub">variable and adaptive mono font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
+  <p class="sub">variable mono font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </header>
 <div class="g8 bar" role="toolbar" aria-label="stockfleth controls">
   <div class="ctl s-weight"><div class="top"><span class="lbl">weight</span><span class="val" id="wghtv">400</span></div><div class="rng"><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"></div></div>
@@ -141,7 +141,7 @@ footer .k{font-weight:1000}
 </main>
 <footer class="g8">
   <p class="f1"><span class="k">stockfleth</span><br>246 characters<br>wght 100–1000 · wdth 70–145<br>italic, mono · good for code</p>
-  <p class="f2">a mono font drawn line by line on a 5 × 9 grid.<br>variable and adaptive: weight, width, italic.<br>for code and for display.<br>fluent in the nordic and latin-script sámi languages.</p>
+  <p class="f2">a mono font drawn line by line on a 5 × 9 grid.<br>variable: weight, width, italic.<br>for code and for display.<br>fluent in the nordic and latin-script sámi languages.</p>
   <p class="f3">free for personal and trial use.<br>commercial use needs a licence.<br>read the <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">licence</a><br>© 2026 <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </footer>
 
@@ -153,7 +153,7 @@ const stage=$('stage');
 const fvs=(w,d)=>`"wght" ${w}, "wdth" ${d}, "slnt" ${-S.slnt}`;
 
 function makeLine(text){const d=document.createElement('div');d.className='line';d.textContent=text;return d}
-['the QUICK brown fox {jumps} over the LAZY dog @ 4:20'].forEach(t=>stage.appendChild(makeLine(t)));
+['the QUICK brown fox {jumps} over the LAZY dog @ 4:20*'].forEach(t=>stage.appendChild(makeLine(t)));
 
 /* the whole box is one editable area, so selections can span lines; each line is still its own
    block so it can be fitted. Keep every top-level child a div.line, preserving the caret. */

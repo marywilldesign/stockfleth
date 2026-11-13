@@ -1,6 +1,6 @@
 # stockfleth
 
-A mono font drawn line by line on a 5 × 9 grid: variable, adaptive, and fluent in the Nordic languages and every Latin-script Sámi language.
+A mono font drawn line by line on a 5 × 9 grid: variable, and fluent in the Nordic languages and every Latin-script Sámi language.
 
 **Live specimen:** https://marywildesign.com/stockfleth/
 
@@ -38,6 +38,10 @@ Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold,
 }
 .headline { font-family: Stockfleth, ui-monospace, monospace; font-variation-settings: "wght" 700, "wdth" 120, "slnt" 0; }
 ```
+
+## About the specimen's "adaptive" mode
+
+The **adaptive** button on the specimen page is a feature of the page, not of the font file: a small script picks a width-axis value and size for each line until it fills the box. The downloaded font is variable (weight, width, slant); to get the same fitting elsewhere you would script it the same way.
 
 ## Licence
 
