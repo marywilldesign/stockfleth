@@ -1,6 +1,6 @@
 # stockfleth
 
-A variable monospace typeface drawn on a 5 × 9 module grid.
+A mono font drawn line by line on a 5 × 9 grid: variable, adaptive, and fluent in the Nordic languages and Northern, Lule, Southern and Inari Sámi.
 
 **Live specimen:** https://marywildesign.com/stockfleth/
 
