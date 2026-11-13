@@ -1,6 +1,6 @@
 # stockfleth
 
-A mono font drawn line by line on a 5 × 9 grid: variable, and fluent in the Nordic languages and every Latin-script Sámi language.
+A mono font drawn line by line on a 5 × 9 grid: variable, and fluent in European languages and every Latin-script Sámi language.
 
 **Live specimen:** https://marywildesign.com/stockfleth/
 
@@ -12,11 +12,11 @@ A mono font drawn line by line on a 5 × 9 grid: variable, and fluent in the Nor
 | width | `wdth` | 70–145 |
 | *italic* (slant) | `slnt` | 0 to −12° |
 
-Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold, Black, Ultra, each upright and *italic*.
+Named styles (Google Fonts names): Thin, ExtraLight, Light, Regular, Medium, SemiBold, Bold, ExtraBold, Black, each upright and *italic*. The weight axis runs on to 1000, which the static download includes as ExtraBlack.
 
 ## Character set
 
-251 characters: ASCII, the Western European set (Windows-1252 / Latin-1) and every Latin-script Sámi alphabet (Northern, Lule, Southern, Ume, Pite, Inari and Skolt: Č Đ Ŋ Ŧ Ʒ Ǯ Ǧ Ǥ Ǩ ʹ): accented letters, curly quotes, dashes, €, £, ©, ™, fractions, arrows, ✓ ✗ and more. Strictly monospaced: every glyph has the same advance width. The `fi`, `fl`, `ff`, `ft` and `fj` ligatures swap in single-cell alternates that sit a little closer together, and `->`, `=>` and `<-` join into single arrows drawn across their two cells (the Fira Code / JetBrains Mono approach), so columns never shift. Turn them off with `font-variant-ligatures: none` or your editor's ligature setting.
+361 characters: ASCII, the Western European set (Windows-1252 / Latin-1), the Central and Eastern European letters of the Google Fonts Latin Core set (Polish, Czech, Slovak, Hungarian, Romanian, Turkish, Baltic, Maltese, Welsh and more), combining accents, and every Latin-script Sámi alphabet (Northern, Lule, Southern, Ume, Pite, Inari and Skolt: Č Đ Ŋ Ŧ Ʒ Ǯ Ǧ Ǥ Ǩ ʹ): accented letters, curly quotes, dashes, €, £, ©, ™, fractions, arrows, ✓ ✗ and more. Strictly monospaced: every glyph has the same advance width. The `fi`, `fl`, `ff`, `ft` and `fj` ligatures swap in single-cell alternates that sit a little closer together, and `->`, `=>` and `<-` join into single arrows drawn across their two cells (the Fira Code / JetBrains Mono approach), so columns never shift. Turn them off with `font-variant-ligatures: none` or your editor's ligature setting.
 
 ## Files
 
