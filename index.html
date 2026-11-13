@@ -6,6 +6,7 @@
 <style>
 @font-face{font-family:Stockfleth;src:url(fonts/Stockfleth-VF.woff2) format("woff2"),url(fonts/Stockfleth-VF.ttf) format("truetype");font-display:swap}
 :root{--fg:#1f3fd1;--bg:#eef0fb}
+html{transition:none}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--fg)}
 body{font:12px/1.4 ui-monospace,Menlo,monospace;min-height:100vh}
@@ -17,11 +18,18 @@ input[type=range]{width:150px;accent-color:var(--fg)}
 input[type=range]:disabled{opacity:.35}
 .val{min-width:34px;font-variant-numeric:tabular-nums}
 button,select{font:inherit;color:var(--fg);background:transparent;border:1.5px solid var(--fg);border-radius:0;padding:5px 10px;cursor:pointer}
+select{-webkit-appearance:none;appearance:none;padding:5px 40px 5px 10px;background-color:transparent;
+  background-image:linear-gradient(45deg,transparent 50%,var(--fg) 50%,var(--fg) calc(50% + 1.6px),transparent calc(50% + 1.6px)),
+                   linear-gradient(-45deg,transparent 50%,var(--fg) 50%,var(--fg) calc(50% + 1.6px),transparent calc(50% + 1.6px));
+  background-size:7px 7px,7px 7px;background-position:calc(100% - 20px) 50%,calc(100% - 13px) 50%;background-repeat:no-repeat}
+select option{color:#000;background:#fff}
 button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
 button.b{font-weight:800}button.i{font-style:italic}
 input[type=color]{width:34px;height:28px;padding:0;border:1.5px solid var(--fg);background:none;cursor:pointer}
-.badge{padding:3px 7px;border:1.5px solid var(--fg)}
-.badge.fail{background:var(--fg);color:var(--bg)}
+.badge{padding:3px 0;font-variant-numeric:tabular-nums}
+.badge .mk{font-family:Stockfleth,ui-monospace,monospace;font-variation-settings:"wght" 700;font-size:1.25em;vertical-align:-.08em;margin-left:.25em}
+.badge.fail{text-decoration:underline;text-underline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .sep{width:1.5px;align-self:stretch;background:var(--fg);opacity:.25}
 main{padding:22px 20px 10px}
 #stage{border:2px solid var(--fg);padding:16px 16px 22px;min-height:40vh;overflow:visible;margin-bottom:22px}
@@ -38,7 +46,8 @@ main{padding:22px 20px 10px}
 .dl span{opacity:.75}
 h2{font-size:12px;font-weight:700;letter-spacing:.04em;margin:0 0 10px}
 footer{border-top:2px solid var(--fg);padding:16px 20px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-footer a{color:var(--fg)}
+footer a,.lic a{color:var(--fg)}
+.lic{margin:-18px 0 30px;opacity:.85}
 @media (max-width:700px){input[type=range]{width:110px}.bar{padding:10px 16px}main{padding:16px}}
 </style></head><body>
 <div class="bar" role="toolbar" aria-label="stockfleth controls">
@@ -69,8 +78,9 @@ footer a{color:var(--fg)}
     <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (31 kb).</span></a>
     <a href="fonts/Stockfleth-static-otf.zip" download><b>static otf</b><span>20 styles, hairline → ultra, upright + italic. for apps without variable font support.</span></a>
   </div>
+  <p class="lic">free for personal and trial use · commercial use needs a licence · <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">read the licence</a></p>
 </main>
-<footer><span>stockfleth · 219 characters · wght 100–1000 · wdth 70–145 · italic</span><span>by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></span></footer>
+<footer><span>stockfleth · 221 characters · wght 100–1000 · wdth 70–145 · italic · <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">licence</a></span><span>by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></span></footer>
 
 <script>
 /* ---------------- type controls ---------------- */
@@ -172,7 +182,7 @@ function apply(){
   $('fg').value=rgb2hex(FG);$('bg').value=rgb2hex(BG);
   const c=contrast(FG,BG),t=+$('target').value,ok=c>=t;
   const lvl=c>=7?'aaa':c>=4.5?'aa':c>=3?'aa large':'fails';
-  $('ratio').textContent=c.toFixed(2)+':1 · '+lvl+(ok?' ✓':' ✗');$('ratio').classList.toggle('fail',!ok);
+  $('ratio').innerHTML=c.toFixed(2)+':1 · '+lvl+'<span class="mk" aria-hidden="true">'+(ok?'✓':'✗')+'</span><span class="sr">'+(ok?' passes':' fails')+'</span>';$('ratio').classList.toggle('fail',!ok);
 }
 $('fg').oninput=e=>{FG=hex2rgb(e.target.value);derive('fg')};
 $('bg').oninput=e=>{BG=hex2rgb(e.target.value);derive('bg')};
@@ -180,5 +190,12 @@ $('mode').onchange=()=>derive('fg');
 $('target').onchange=()=>derive('fg');
 $('swap').onclick=()=>{[FG,BG]=[BG,FG];apply()};
 
-document.fonts.ready.then(()=>{derive('fg');layout()});
+function randomise(){
+  const mode=Math.random()<0.5?'analogous':'complementary'; $('mode').value=mode;
+  const h=Math.random()*360, s=55+Math.random()*35;
+  if(Math.random()<0.35){ BG=hsl2rgb([h, s*0.55, 7+Math.random()*7]); derive('bg') }      // dark ground, vivid type
+  else { FG=hsl2rgb([h, s, 28+Math.random()*22]); derive('fg') }                          // light ground, coloured type
+}
+randomise();
+document.fonts.ready.then(()=>{apply();layout()});
 </script></body></html>

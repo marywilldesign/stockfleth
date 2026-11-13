@@ -16,7 +16,7 @@ Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold,
 
 ## Character set
 
-219 characters: ASCII plus the Western European set (Windows-1252 / Latin-1): accented letters, curly quotes, dashes, €, £, ©, ™, fractions and more. Standard ligatures `fi`, `fl` and `ff` each take exactly two cells, so the grid holds.
+221 characters: ASCII plus the Western European set (Windows-1252 / Latin-1): accented letters, curly quotes, dashes, €, £, ©, ™, fractions, ✓ ✗ and more. Standard ligatures `fi`, `fl` and `ff` each take exactly two cells, so the grid holds.
 
 ## Files
 
@@ -37,3 +37,11 @@ Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold,
 }
 .headline { font-family: Stockfleth, ui-monospace, monospace; font-variation-settings: "wght" 700, "wdth" 120, "slnt" 0; }
 ```
+
+## Licence
+
+Free for **personal and trial use**. Commercial use needs a separate licence. See [LICENSE.md](LICENSE.md) and get in touch via [marywildesign.com](https://marywildesign.com).
+
+---
+
+by [marywildesign](https://marywildesign.com)
