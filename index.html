@@ -12,16 +12,16 @@
 <meta property="og:title" content="stockfleth: variable mono font">
 <meta property="og:description" content="a mono font drawn line by line on a 5 × 9 grid. variable: weight, width, italic. fluent in european and latin-script sámi languages. by marywildesign.">
 <meta property="og:url" content="https://marywildesign.com/stockfleth/">
-<meta property="og:image" content="https://marywildesign.com/stockfleth/og-image.png?v=3">
-<meta property="og:image:secure_url" content="https://marywildesign.com/stockfleth/og-image.png?v=3">
+<meta property="og:image" content="https://marywildesign.com/stockfleth/og-image.png?v=4">
+<meta property="og:image:secure_url" content="https://marywildesign.com/stockfleth/og-image.png?v=4">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1254">
-<meta property="og:image:alt" content="stockfleth in heavy type above a dark red band reading @marywildesign, then the QUICK brown fox {jumps} over the LAZY dog @ 12:34* in a thin box, dark red on pale aqua">
+<meta property="og:image:alt" content="stockfleth in heavy type above a dark red band reading @marywildesign, then The quick brown fox jumps ↗ over ↘ the lazy dog @ 12:34* in a thin box, dark red on pale aqua">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="stockfleth: variable mono font">
 <meta name="twitter:description" content="a mono font drawn line by line on a 5 × 9 grid, by marywildesign.">
-<meta name="twitter:image" content="https://marywildesign.com/stockfleth/og-image.png?v=3">
+<meta name="twitter:image" content="https://marywildesign.com/stockfleth/og-image.png?v=4">
 <style>
 @font-face{font-family:Stockfleth;src:url(fonts/Stockfleth-VF.woff2) format("woff2"),url(fonts/Stockfleth-VF.ttf) format("truetype");font-weight:100 1000;font-stretch:70% 145%;font-style:normal;font-display:block}
 html.loading body{visibility:hidden}
@@ -212,7 +212,7 @@ const stage=$('stage');
 const fvs=(w,d)=>`"wght" ${w}, "wdth" ${d}, "slnt" ${-S.slnt}`;
 
 function makeLine(text){const d=document.createElement('div');d.className='line';d.textContent=text;return d}
-['the QUICK brown fox {jumps} over the LAZY dog @ 12:34*'].forEach(t=>stage.appendChild(makeLine(t)));
+['The quick brown fox jumps ↗ over ↘ the lazy dog @ 12:34*'].forEach(t=>stage.appendChild(makeLine(t)));
 
 /* the whole box is one editable area, so selections can span lines; each line is still its own
    block so it can be fitted. Keep every top-level child a div.line, preserving the caret. */
