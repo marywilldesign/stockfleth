@@ -1,41 +1,41 @@
-# Stockfleth — Personal & Trial Use Licence
+# Stockfleth licence
 
-Copyright © 2026 marywildesign (https://marywildesign.com). All rights reserved except as granted below.
+Copyright © 2026 marywildesign (https://marywildesign.com). All rights reserved, apart from what this licence lets you do.
 
-"Stockfleth" ("the Font") means the font files in this repository (variable TTF and WOFF2, static OTF), any derived instances.
+"The font" here means the Stockfleth font files in this repository (the variable TTF and WOFF2 and the static OTFs), any instances made from them.
 
-## 1. What you may do, free of charge
+## Free for personal use and trials
 
-You may download, install and use the Font for:
+You can download, install and use the font for free:
 
-- **Personal use:** your own non-commercial projects, such as personal artwork, school or university work, personal websites with no advertising or sales, and gifts or invitations that are not sold.
-- **Trial use:** evaluating the Font, including sketches, unpublished mock-ups and internal pitch drafts, to decide whether to buy a commercial licence. Trial work must not be published, delivered to a client or sold.
+- in your own non-commercial work, such as personal artwork, school or university projects, a personal website with no ads or sales, or invitations and gifts that aren't sold;
+- to try it out before buying a commercial licence, in sketches, mock-ups and internal drafts. Trial work can't be published, handed to a client or sold.
 
-You may embed the Font (for example with `@font-face`) on a personal, non-commercial website, provided the Font files are not offered for download from that site.
+You can embed the font on a personal, non-commercial website (for example with `@font-face`), as long as the font files aren't offered for download from that site.
 
-## 2. What needs a commercial licence
+## Commercial use needs a licence
 
-Any commercial use requires a separate written licence from marywildesign. Commercial use includes, but is not limited to:
+Anything commercial needs a separate written licence from me. That includes:
 
-- work for clients or employers, paid or unpaid;
-- products, packaging, merchandise or printed matter that is sold or promotes something that is sold;
-- logos, branding or identities for any business or organisation;
-- advertising, marketing, sponsored or monetised content (including monetised social media and video);
-- websites, apps, games, software or broadcast for a business, or that earn revenue;
+- work for clients or employers, paid or not;
+- products, packaging, merchandise or printed matter that's sold, or that promotes something sold;
+- logos, branding or identities for a business or organisation;
+- advertising, marketing, sponsored or monetised content, including monetised social media and video;
+- websites, apps, games, software or broadcast for a business, or that make money;
 - publications that are sold.
 
-To ask about a commercial licence, get in touch via https://marywildesign.com.
+If you're not sure whether your use counts, ask. You can reach me through https://marywildesign.com.
 
-## 3. What you may not do
+## What you can't do
 
-- Sell, sublicense, rent or redistribute the Font, alone or bundled, modified or unmodified.
-- Distribute fonts made by modifying the Font, or publish them under another name.
-- Remove or change the copyright and licence information in the font files.
+- Sell, sublicense, rent or share the font, on their own or bundled with anything else, changed or unchanged.
+- Release a font made by modifying Stockfleth, or publish the font under another name.
+- Remove or change the copyright and licence information inside the font files.
 
-## 4. No warranty
+## No warranty
 
-The Font is provided "as is", without warranty of any kind. In no event shall marywildesign be liable for any claim, damages or other liability arising from the use of the Font.
+The font is provided as it is, without any warranty. marywildesign isn't liable for any claim, damage or other loss that comes from using it.
 
-## 5. Termination
+## If the terms are broken
 
-This licence ends automatically if you break its terms. You must then stop using the Font and delete all copies.
+This licence ends automatically if you break any of these terms. You then have to stop using the font and delete every copy.

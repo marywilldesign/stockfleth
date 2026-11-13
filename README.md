@@ -38,9 +38,9 @@ Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold,
 .headline { font-family: Stockfleth, ui-monospace, monospace; font-variation-settings: "wght" 700, "wdth" 120, "slnt" 0; }
 ```
 
-## About the specimen's "adaptive" mode
+## About the specimen's "fit" mode
 
-The **adaptive** button on the specimen page is a feature of the page, not of the font file: a small script picks a width-axis value and size for each line until it fills the box. The downloaded font is variable (weight, width, slant); to get the same fitting elsewhere you would script it the same way.
+The **fit** button on the specimen page is a feature of the page, not of the font file: a small script picks a width-axis value and size for each line until it fills the box. The downloaded font is variable (weight, width, slant); to get the same fitting elsewhere you would script it the same way.
 
 ## Licence
 
