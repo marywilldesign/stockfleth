@@ -25,7 +25,6 @@ Named styles: Hairline, Thin, Light, Regular, Medium, Semibold, Bold, Extrabold,
 | `fonts/Stockfleth-VF.ttf` | variable font for desktop apps (Figma, Adobe, macOS, Windows) |
 | `fonts/Stockfleth-VF.woff2` | variable font for the web |
 | `fonts/Stockfleth-static-otf.zip` | 20 static OTFs for apps without variable-font support |
-| `fonts/Stockfleth-latex.zip` | LaTeX package (`\usepackage{stockfleth}`, XeLaTeX / LuaLaTeX), example and the 20 OTFs |
 
 ### Web use
 
