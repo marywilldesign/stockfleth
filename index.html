@@ -70,6 +70,9 @@ div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px soli
 /* the arrow turns in quarter steps: hover previews the next quarter turn, a click commits it (and changes the colours) */
 #refresh:hover:not(.spun),#refresh:focus-visible:not(.spun){transform:rotate(calc(var(--r) + 90deg))}
 #refresh.spun{transition:transform .3s}
+/* an invisible tap area around the small arrow, about 44px square, so it is easy to hit on a phone */
+#refresh{position:relative}
+#refresh::after{content:"";position:absolute;inset:-12px -16px}
 .chip{height:22px;padding:0 8px;font-size:12px;margin:0 auto 0 10px;letter-spacing:.06em}
 .ctl .rng.auto input,.ctl .rng.auto .tick,.ctl .rng.auto::after{opacity:.4}
 .lbl,.val,.badge,.sub,.section>h2,.grow h3,footer.g8,.dl a span,.cap{text-transform:uppercase;letter-spacing:.06em}
