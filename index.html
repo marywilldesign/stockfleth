@@ -46,13 +46,13 @@ div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px soli
 .ctl .top{display:flex;justify-content:space-between;gap:8px;white-space:nowrap}
 .ctl .row,.ctl .rng{display:flex;gap:8px;align-items:center;height:36px}
 .ctl select{height:36px}
-.s-weight{grid-column:1/3}.s-width{grid-column:3/5}.s-style{grid-column:5/7}.s-colour{grid-column:7/8}.s-harm{grid-column:8/9}
+.s-weight{grid-column:1/3}.s-width{grid-column:3/5}.s-style{grid-column:5/7}.s-colours{grid-column:7/9}
 .lbl,.val,.badge,.sub,.section>h2,.grow h3,footer.g8,.dl a span,.cap{text-transform:uppercase;letter-spacing:.06em}
 .lbl{font-weight:1000}
 .val{font-variant-numeric:tabular-nums}
 input[type=range]{width:100%;margin:0;accent-color:var(--fg)}
 input[type=range]:disabled{opacity:.35}
-button,select{font:inherit;color:var(--fg);background:transparent;border:1.5px solid var(--fg);border-radius:0;padding:0 12px;height:36px;cursor:pointer}
+button,select{font:inherit;color:var(--fg);background:transparent;border:1px solid var(--fg);border-radius:0;padding:0 12px;height:36px;cursor:pointer}
 select{width:100%;-webkit-appearance:none;appearance:none;padding:0 32px 0 12px;background-color:transparent;
   background-image:linear-gradient(45deg,transparent 50%,var(--fg) 50%,var(--fg) calc(50% + 1.6px),transparent calc(50% + 1.6px)),
                    linear-gradient(-45deg,transparent 50%,var(--fg) 50%,var(--fg) calc(50% + 1.6px),transparent calc(50% + 1.6px));
@@ -68,7 +68,7 @@ input[type=color]{width:36px;height:36px;padding:0;border:1.5px solid var(--fg);
 
 /* stage */
 main.g8{padding-top:22px}
-#stage{grid-column:1/-1;border:2px solid var(--fg);padding:16px 16px 22px;height:60vh;min-height:280px;overflow:auto;margin-bottom:34px;scrollbar-width:thin}
+#stage{grid-column:1/-1;border:1px solid var(--fg);padding:16px 16px 22px;height:60vh;min-height:280px;overflow:auto;margin-bottom:34px;scrollbar-width:thin}
 .line{display:block;width:100%;white-space:pre-wrap;overflow-wrap:anywhere;outline:none;font-family:Stockfleth,ui-monospace,Menlo,Consolas,monospace;line-height:1.08;
       font-size:min(12vw,150px);min-height:1.08em;caret-color:var(--fg)}
 
@@ -77,33 +77,14 @@ main.g8{padding-top:22px}
 .section>h2{grid-column:1/-1;font-size:20px;line-height:25px;font-weight:1000;margin:0 0 16px}
 .grow{grid-column:1/-1;display:grid;grid-template-columns:subgrid;margin-bottom:18px}
 .grow h3{grid-column:1/3;font-size:15px;font-weight:1000;margin:0}.grow h3 span{opacity:.55;font-weight:800;margin-left:6px}
-.cells{grid-column:3/9;display:flex;flex-wrap:wrap;padding:2px 0 0 2px}
+.cells{grid-column:3/9;display:flex;flex-wrap:wrap;padding:1px 0 0 1px}
 .cells.wide div{width:138px}
-.cells div{width:70px;border:2px solid var(--fg);margin:-2px 0 0 -2px;height:124px;padding-top:22px;display:flex;align-items:center;justify-content:center;font-family:Stockfleth,ui-monospace,Menlo,Consolas,monospace;font-size:50px;line-height:1;position:relative;overflow:hidden}
+.cells div{width:70px;border:1px solid var(--fg);margin:-1px 0 0 -1px;height:124px;padding-top:22px;display:flex;align-items:center;justify-content:center;font-family:Stockfleth,ui-monospace,Menlo,Consolas,monospace;font-size:50px;line-height:1;position:relative;overflow:hidden}
 .cells small{position:absolute;left:0;top:0;right:0;z-index:2;padding:3px 4px;background:var(--bg);font:900 12px Stockfleth,ui-monospace,monospace;color:color-mix(in srgb,var(--fg) 65%,var(--bg))}
 .dl{grid-column:3/9;display:grid;grid-template-columns:subgrid}
-.dl a{grid-column:span 2;display:block;padding:14px 16px 16px;border:2px solid var(--fg);text-decoration:none;min-height:150px}
+.dl a{grid-column:span 2;display:block;padding:14px 16px 16px;border:1px solid var(--fg);text-decoration:none;min-height:150px}
 .dl a:hover,.dl a:focus-visible{background:var(--fg);color:var(--bg);outline:none}
 .dl b{display:block;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-size:30px;font-weight:400;font-variation-settings:"wght" 900;margin-bottom:10px}
-
-/* preview poster */
-.poster{--m:#5b0e2d;--l:#b9dcf2;grid-column:1/-1;display:grid;grid-template-columns:2fr 3.7fr 4.3fr;background:var(--m);color:var(--l);
-  padding:clamp(12px,2.4vw,40px);font-family:Stockfleth,ui-monospace,monospace;font-weight:400}
-.poster ::selection{background:var(--l);color:var(--m)}
-.pb{padding:clamp(10px,1.6vw,26px);display:flex;flex-direction:column;justify-content:center;min-width:0;overflow:hidden}
-.lt{background:var(--l);color:var(--m)}.dk{background:var(--m);color:var(--l)}
-.pa{grid-column:1;grid-row:1;align-items:center}.pbk{grid-column:2;grid-row:1}.pc{grid-column:3;grid-row:1}
-.pd{grid-column:1;grid-row:2;align-items:center}.pe{grid-column:2;grid-row:2}.pg{grid-column:3;grid-row:2}
-.pf{display:block;white-space:pre;width:max-content;line-height:.98}
-.pf.acc{padding-top:.36em}
-.pv{display:block;white-space:pre;writing-mode:vertical-rl;transform:rotate(180deg);line-height:.9}
-.cap{font-size:clamp(12px,1.05vw,16px);font-weight:800;margin-top:.5em}
-.oct{display:inline-grid;place-items:center;position:relative;width:1.12em;height:1.12em;vertical-align:-.16em}
-.oct svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:5}
-.oct>span{position:relative;font-size:.66em;line-height:1}
-.oct.big{font-variation-settings:"wght" 600}
-@media (max-width:760px){.poster{grid-template-columns:1fr 1fr}.pa{grid-column:1;grid-row:1}.pbk{grid-column:2;grid-row:1}.pc{grid-column:1/-1;grid-row:2}
-  .pd{grid-column:1/-1;grid-row:3}.pd .pv{writing-mode:horizontal-tb;transform:none}.pe{grid-column:1/-1;grid-row:4}.pg{grid-column:1/-1;grid-row:5}}
 
 /* footer on the same columns */
 footer.g8{border-top:1px solid var(--fg);padding-top:18px;padding-bottom:30px;row-gap:20px}
@@ -114,7 +95,7 @@ footer .k{font-weight:1000}
 /* tablet: 4 columns */
 @media (max-width:1100px){
   .g8,.section,.grow,.dl{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .s-weight{grid-column:1/3}.s-width{grid-column:3/5}.s-style{grid-column:1/3}.s-colour{grid-column:3/4}.s-harm{grid-column:4/5}
+  .s-weight{grid-column:1/3}.s-width{grid-column:3/5}.s-style{grid-column:1/3}.s-colours{grid-column:3/5}
   .grow h3,.cells{grid-column:1/-1}.grow h3{margin-bottom:8px}
   .dl{grid-column:1/-1}.dl a{grid-column:span 2}
   .f1{grid-column:1/3}.f2{grid-column:3/5}.f3{grid-column:1/3}.f4{grid-column:3/5}
@@ -123,7 +104,7 @@ footer .k{font-weight:1000}
 @media (max-width:640px){
   :root{--pad:16px;--gut:14px}
   .g8,.section,.grow,.dl{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .s-weight,.s-width,.s-style{grid-column:1/-1}.s-colour{grid-column:1/2}.s-harm{grid-column:2/3}
+  .s-weight,.s-width,.s-style{grid-column:1/-1}.s-colours{grid-column:1/-1}
   .dl a{grid-column:1/-1;min-height:0}
   .f1,.f2,.f3,.f4{grid-column:1/-1}
   .bar{position:static}
@@ -140,35 +121,12 @@ footer .k{font-weight:1000}
     <button class="i" id="ital" aria-pressed="false" title="italic (⌘/ctrl+i)">italic</button>
     <button class="b" id="bold" aria-pressed="false" title="bold (⌘/ctrl+b)">bold</button>
     <button id="adapt" aria-pressed="true" title="each line stretches and scales to fill the box">adaptive</button></div></div>
-  <div class="ctl s-colour"><div class="top"><span class="lbl">text · bg</span></div><div class="row">
-    <input id="fg" type="color" value="#1f3fd1" aria-label="text colour"><input id="bg" type="color" value="#f4f1ea" aria-label="background colour">
-    <button id="swap" title="swap text and background" aria-label="swap text and background"><svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" style="display:block"><path d="M1 4.5h16M13.5 1l3.5 3.5-3.5 3.5M19 9.5H3M6.5 6L3 9.5 6.5 13" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="square"/></svg></button></div></div>
-  <div class="ctl s-harm"><div class="top"><span class="lbl">harmony</span></div>
-    <select id="mode" aria-label="colour harmony"><option value="free">free</option><option value="analogous" selected>analogous</option><option value="complementary">complementary</option></select>
-    <span class="badge" id="ratio">—</span></div>
+  <div class="ctl s-colours"><div class="top"><span class="lbl">colours</span></div><div class="row">
+    <button id="refresh" title="next colour pairing">refresh</button><span class="sr" id="colour-status" aria-live="polite"></span></div></div>
 </div>
 
 <main class="g8">
   <div id="stage" role="textbox" aria-multiline="true" aria-label="type here to test the font" contenteditable="true" spellcheck="false"></div>
-  <section class="section" aria-labelledby="h-prev"><h2 id="h-prev">preview</h2>
-    <div class="poster" id="poster">
-      <div class="pb pa lt"><span class="oct big"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="30,4 70,4 96,30 96,70 70,96 30,96 4,70 4,30"/></svg><span>4</span></span></div>
-      <div class="pb pbk dk"><span class="pf" data-w="500" lang="nb">kult<span aria-hidden="true">↗</span></span><span class="cap">cool</span></div>
-      <div class="pb pc lt"><span class="pf" data-w="900" lang="nb">gøy<span aria-hidden="true">↘</span></span><span class="cap">fun</span></div>
-      <div class="pb pd dk"><span class="pv" data-w="400">N.O.</span></div>
-      <div class="pb pe lt">
-        <span class="pf" data-w="800" lang="nb">koselig</span>
-        <span class="pf" data-w="250">= cozy</span>
-        <span class="pf" data-w="800" lang="nb">#blåbær</span>
-        <span class="pf" data-w="250">(blueberry)</span>
-        <span class="pf" data-w="700" lang="nb">hyggelig?</span></div>
-      <div class="pb pg dk">
-        <span class="pf" data-w="200" lang="nb">FJORD!</span>
-        <span class="pf" data-w="600">’26 · 0°C · 1000 m</span>
-        <span class="pf acc" data-w="400"><span lang="nb">NIVÅ</span> <span class="oct"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="30,4 70,4 96,30 96,70 70,96 30,96 4,70 4,30"/></svg><span>3</span></span></span>
-        <span class="pf" data-w="500" lang="nb">spørsmål/svar</span>
-        <span class="pf" data-w="250"><span aria-hidden="true">← </span>question/answer</span></div>
-    </div></section>
   <section class="section" aria-labelledby="h-chars"><h2 id="h-chars">characters</h2><div id="charsets" style="display:contents"></div></section>
   <section class="section" aria-labelledby="download"><h2 class="lab" id="download" style="grid-column:1/3">download</h2>
     <div class="dl">
@@ -326,60 +284,43 @@ function partner(fixed,h,s,target,role){
   }
   return lum(fixed)>.18?[0,0,0]:[255,255,255];
 }
-const TARGET=4.5;   // every pairing is held to wcag aa (4.5:1); the readout shows when it also reaches aaa
+const TARGET=4.5;   // every pairing is held to wcag aa (4.5:1) or better
 let FG=hex2rgb('#1f3fd1'),BG=hex2rgb('#eef0fb');
-function derive(from){                       // from = 'fg' | 'bg' : the colour the user just set
-  const mode=$('mode').value,target=TARGET;
-  const src=from==='fg'?FG:BG, other=from==='fg'?BG:FG;
-  const [h,s]=rgb2hsl(src), [oh,os]=rgb2hsl(other);
-  let nh,ns;
-  if(mode==='analogous'){nh=(h+30)%360;ns=Math.min(s,70)}
-  else if(mode==='complementary'){nh=(h+180)%360;ns=Math.min(s,70)}
-  else{ if(contrast(src,other)>=target)return apply(); nh=oh;ns=os }
-  const p=partner(src,nh,from==='fg'?ns*0.75:ns,target,from==='fg'?'bg':'fg');
-  if(from==='fg')BG=p;else FG=p;
+/* colour families, dealt like cards from a shuffled deck so none comes back too soon;
+   each refresh also alternates the harmony between analogous and complementary */
+const FAMILIES=[
+  {name:'black and grey',neutral:true},{name:'blue',h:[205,235]},{name:'red',h:[352,368]},{name:'pink',h:[318,338]},
+  {name:'green',h:[100,145]},{name:'teal',h:[172,190]},{name:'purple',h:[262,288]},{name:'orange',h:[18,32]},{name:'yellow',h:[44,56]}];
+let deck=[],lastFam=-1,harmony=Math.random()<.5?'analogous':'complementary';
+function dealFamily(){
+  if(!deck.length){
+    deck=FAMILIES.map((_,i)=>i).sort(()=>Math.random()-.5);
+    if(deck[deck.length-1]===lastFam)deck.unshift(deck.pop());      // never the same family twice in a row
+  }
+  return lastFam=deck.pop();
+}
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function refreshColours(){
+  harmony=harmony==='analogous'?'complementary':'analogous';
+  const fam=FAMILIES[dealFamily()];
+  if(fam.neutral){
+    const h=rnd(0,360);
+    if(harmony==='complementary'){BG=hsl2rgb([h,6,rnd(5,9)]);FG=hsl2rgb([(h+180)%360,4,rnd(84,92)])}
+    else{BG=hsl2rgb([h,5,rnd(88,93)]);FG=hsl2rgb([(h+30)%360,6,rnd(12,22)])}
+  } else {
+    const h=(rnd(fam.h[0],fam.h[1])+360)%360, sat=rnd(58,86), nh=harmony==='analogous'?(h+30)%360:(h+180)%360;
+    if(Math.random()<.35){BG=hsl2rgb([h,sat*.6,rnd(8,13)]);FG=partner(BG,nh,Math.min(sat,75),TARGET,'fg')}   // dark ground, vivid type
+    else{FG=hsl2rgb([h,sat,rnd(28,46)]);if(contrast(FG,[255,255,255])<TARGET+.3)FG=hsl2rgb([h,sat,24]);
+         BG=partner(FG,nh,Math.min(sat,70)*.75,TARGET,'bg')}                                                   // light ground, coloured type
+  }
+  if(contrast(FG,BG)<TARGET){FG=lum(BG)>.18?[17,17,17]:[245,245,245]}
   apply();
+  $('colour-status').textContent=fam.name+', '+harmony+', contrast '+contrast(FG,BG).toFixed(1)+' to 1';
 }
 function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
-  $('fg').value=rgb2hex(FG);$('bg').value=rgb2hex(BG);
-  const c=contrast(FG,BG),t=TARGET,ok=c>=t;
-  const lvl=c>=7?'aaa':c>=4.5?'aa':c>=3?'aa large':'fails';
-  $('ratio').innerHTML=c.toFixed(2)+':1 · '+lvl+'<span class="mk" aria-hidden="true">'+(ok?'✓':'✗')+'</span><span class="sr">'+(ok?' passes':' fails')+'</span>';$('ratio').classList.toggle('fail',!ok);
 }
-$('fg').oninput=e=>{FG=hex2rgb(e.target.value);derive('fg')};
-$('bg').oninput=e=>{BG=hex2rgb(e.target.value);derive('bg')};
-$('mode').onchange=()=>derive('fg');
-$('swap').onclick=()=>{[FG,BG]=[BG,FG];apply()};
-
-function randomise(){
-  const mode=Math.random()<0.5?'analogous':'complementary'; $('mode').value=mode;
-  const h=Math.random()*360, s=55+Math.random()*35;
-  if(Math.random()<0.35){ BG=hsl2rgb([h, s*0.55, 7+Math.random()*7]); derive('bg') }      // dark ground, vivid type
-  else { FG=hsl2rgb([h, s, 28+Math.random()*22]); derive('fg') }                          // light ground, coloured type
-}
-randomise();
-/* preview poster: every line fills its block (width axis first, then size) */
-function fitTo(el,W,vertical){
-  const o={w:+el.dataset.w||400};
-  const m=(wd,fs)=>{el.style.fontVariationSettings=`"wght" ${o.w}, "wdth" ${wd}`;el.style.fontSize=fs+'px';
-    return vertical?el.getBoundingClientRect().height:el.scrollWidth};
-  let fs=Math.max(8,200*W/m(100,200)),lo=70,hi=145;
-  for(let i=0;i<14;i++){const md=(lo+hi)/2;if(m(md,fs)>W)hi=md;else lo=md}
-  m(lo,fs);const got=m(lo,fs);if(Math.abs(got-W)>1){fs*=W/got;m(lo,fs)}
-}
-function fitPoster(){
-  const P=document.getElementById('poster'); if(!P) return;
-  const inner=b=>{const cs=getComputedStyle(b);return b.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)};
-  P.querySelectorAll('.pf').forEach(el=>fitTo(el,inner(el.parentElement)));
-  const A=P.querySelector('.pa'), big=P.querySelector('.oct.big'); big.style.fontSize=(inner(A)/1.12)+'px';
-  const D=P.querySelector('.pd'), v=D.querySelector('.pv');
-  const vertical=getComputedStyle(v).writingMode.startsWith('vertical');
-  if(vertical){v.style.fontSize='10px';const cs=getComputedStyle(D);
-    fitTo(v,D.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),true);
-    if(v.getBoundingClientRect().width>inner(D)){v.style.fontSize=parseFloat(v.style.fontSize)*inner(D)/v.getBoundingClientRect().width+'px'}}
-  else fitTo(v,inner(D));
-}
-new ResizeObserver(()=>fitPoster()).observe(document.getElementById('poster'));
-document.fonts.ready.then(()=>{apply();layout();fitPoster()});
+$('refresh').onclick=refreshColours;
+lastFam=Math.floor(Math.random()*FAMILIES.length); refreshColours();
+document.fonts.ready.then(()=>{apply();layout()});
 </script></body></html>
