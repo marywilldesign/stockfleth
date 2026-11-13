@@ -6,11 +6,14 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="canonical" href="https://marywildesign.com/stockfleth/">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta name="author" content="marywildesign">
 <meta property="og:site_name" content="marywildesign">
 <meta property="og:title" content="stockfleth: variable mono font">
 <meta property="og:description" content="a mono font drawn line by line on a 5 × 9 grid. variable: weight, width, italic. fluent in the nordic and latin-script sámi languages. by marywildesign.">
 <meta property="og:url" content="https://marywildesign.com/stockfleth/">
 <meta property="og:image" content="https://marywildesign.com/stockfleth/og-image.png">
+<meta property="og:image:secure_url" content="https://marywildesign.com/stockfleth/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
@@ -48,6 +51,11 @@ div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px soli
 .ctl{display:flex;flex-direction:column;gap:7px;min-width:0}
 .ctl .top{display:flex;justify-content:space-between;gap:8px;white-space:nowrap}
 .ctl .row,.ctl .rng{display:flex;gap:8px;align-items:center;height:36px}
+.ctl .rng{position:relative}
+.ctl .rng::after{content:"";position:absolute;right:0;top:50%;width:14px;height:14px;margin-top:-7px;box-sizing:border-box;
+  border:1px solid var(--fg);border-radius:50%;pointer-events:none;z-index:0}
+.ctl .rng:has(input:disabled)::after{opacity:.35}
+.ctl .rng input{position:relative;z-index:1}
 .ctl select{height:36px}
 .s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:5/7}.s-fit{grid-column:7/8}.s-colours{grid-column:8/9}
 .lbl,.val,.badge,.sub,.section>h2,.grow h3,footer.g8,.dl a span,.cap{text-transform:uppercase;letter-spacing:.06em}
@@ -234,9 +242,11 @@ function layout(){
   $('slntv').textContent=S.slnt+'°'; $('adapt').setAttribute('aria-pressed',S.adapt);
   document.querySelectorAll('input[type=range]').forEach(fillTo);
 }
-$('wght').oninput=e=>{S.wght=+e.target.value;layout()};
-$('wdth').oninput=e=>{S.wdth=+e.target.value;layout()};
-$('slnt').oninput=e=>{S.slnt=+e.target.value;layout()};
+// within 4% of the top of its range, the dot snaps into the ring at the end
+function snap(el){const lo=+el.min,hi=+el.max;if(hi-(+el.value)<=(hi-lo)*0.04)el.value=hi;return +el.value}
+$('wght').oninput=e=>{S.wght=snap(e.target);layout()};
+$('wdth').oninput=e=>{S.wdth=snap(e.target);layout()};
+$('slnt').oninput=e=>{S.slnt=snap(e.target);layout()};
 $('adapt').onclick=()=>{S.adapt=!S.adapt;layout()};
 // the typing box is plain text: block the browser's faux bold / italic / underline shortcuts
 stage.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&['b','i','u'].includes(e.key.toLowerCase()))e.preventDefault()});
