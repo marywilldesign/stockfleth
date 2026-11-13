@@ -62,7 +62,12 @@ div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px soli
 .ctl .rng .tick.on{opacity:1}
 .ctl .rng:has(input:disabled) .tick{opacity:.35}
 .ctl select{height:36px}
-.s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:5/7}.s-colours{grid-column:7/9}
+.s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:5/7}.s-size{grid-column:7/9}
+.intro h1{grid-row:1}
+.colour{grid-column:7/9;grid-row:1;align-self:start;justify-self:end;text-align:right;font-size:20px;line-height:25px;white-space:nowrap}
+.colour .ctop{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+#refresh{border:0;background:none;padding:0 2px;height:auto;font-size:28px;line-height:25px;font-variation-settings:"wght" 700,"wdth" 100;color:var(--fg);cursor:pointer;transition:transform .25s}
+#refresh:hover,#refresh:focus-visible{transform:rotate(45deg)}
 .chip{height:22px;padding:0 8px;font-size:12px;margin:0 auto 0 10px;letter-spacing:.06em}
 .ctl .rng.auto input,.ctl .rng.auto .tick,.ctl .rng.auto::after{opacity:.4}
 .lbl,.val,.badge,.sub,.section>h2,.grow h3,footer.g8,.dl a span,.cap{text-transform:uppercase;letter-spacing:.06em}
@@ -124,7 +129,8 @@ footer .k{font-weight:1000}
 /* tablet: 4 columns */
 @media (max-width:1100px){
   .g8,.section,.grow,.dl{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:1/3}.s-colours{grid-column:3/5}
+  .s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:1/3}.s-size{grid-column:3/5}
+  .colour{grid-column:1/-1}.intro h1{grid-row:2}.intro .sub{grid-row:3}
   .grow h3,.cells{grid-column:1/-1}.grow h3{margin-bottom:8px}
   .dl{grid-column:1/-1}.dl a{grid-column:span 2}
   footer.g8{flex-wrap:wrap}
@@ -133,7 +139,7 @@ footer .k{font-weight:1000}
 @media (max-width:640px){
   :root{--pad:16px;--gut:14px}
   .g8,.section,.grow,.dl{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .s-weight,.s-width,.s-slant,.s-colours{grid-column:1/-1}
+  .s-weight,.s-width,.s-slant,.s-size{grid-column:1/-1}
   .dl a{grid-column:1/-1;min-height:0}
   footer.g8{flex-direction:column}
   .bar{position:static}
@@ -141,14 +147,14 @@ footer .k{font-weight:1000}
 </style><noscript><style>html.loading body{visibility:visible}</style></noscript></head><body>
 <header class="g8 intro">
   <h1>stockfleth™</h1>
+  <div class="colour"><div class="ctop"><span class="lbl">colour</span><button id="refresh" aria-label="next colour pairing" title="next colour pairing">↻</button></div><span id="colourv"></span><span class="sr" id="colour-status" aria-live="polite"></span></div>
   <p class="sub">variable mono font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </header>
 <div class="g8 bar" role="toolbar" aria-label="stockfleth controls">
   <div class="ctl s-weight"><div class="top"><span class="lbl">weight</span><span class="val" id="wghtv">400</span></div><div class="rng" data-marks="200,300,400,500,600,700,800,900"><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"></div></div>
   <div class="ctl s-slant"><div class="top"><span class="lbl">slant</span><span class="val" id="slntv">0°</span></div><div class="rng" data-marks="3,6,9"><input id="slnt" type="range" min="0" max="12" step="0.5" value="0" aria-label="slant in degrees"></div></div>
-  <div class="ctl s-width"><div class="top"><span class="lbl">width</span><button class="chip" id="adapt" aria-pressed="true" title="auto: every line stretches and scales to fill the box. drag the slider to set the width yourself.">auto</button><span class="val" id="wdthv">100</span></div><div class="rng" data-marks="75,87.5,100,112.5,125"><input id="wdth" type="range" min="70" max="145" value="100" aria-label="width"></div></div>
-  <div class="ctl s-colours"><div class="top"><span class="lbl">colours</span><span class="val" id="colourv"></span></div><div class="row">
-    <button id="refresh" title="next colour pairing">next colours →</button><span class="sr" id="colour-status" aria-live="polite"></span></div></div>
+  <div class="ctl s-width"><div class="top"><span class="lbl">width</span><span class="val" id="wdthv">100</span></div><div class="rng" data-marks="75,87.5,100,112.5,125"><input id="wdth" type="range" min="70" max="145" value="100" aria-label="width"></div></div>
+  <div class="ctl s-size"><div class="top"><span class="lbl">size</span><button class="chip" id="adapt" aria-pressed="true" title="auto: every line scales and stretches to fill the box. drag size or width to set them yourself.">auto</button><span class="val" id="sizev"></span></div><div class="rng" data-marks="48,96,144,192,240"><input id="size" type="range" min="12" max="300" value="120" aria-label="size in pixels"></div></div>
 </div>
 
 <main class="g8">
@@ -162,14 +168,14 @@ footer .k{font-weight:1000}
     </div></section>
 </main>
 <footer class="g8">
-  <p class="f1"><span class="k">stockfleth:</span><br>characters (250)<br>wght (100–1000) · wdth (70–145)<br><em class="it">italic</em>, mono</p>
+  <p class="f1"><span class="k">stockfleth:</span><br>characters (251)<br>wght (100–1000) · wdth (70–145)<br><em class="it">italic</em>, mono</p>
   <p class="f2">a mono font drawn line by line on a 5 × 9 grid.<br>variable: weight, width, <em class="it">italic</em>.<br>for code and for display.<br>fluent in the nordic and latin-script sámi languages.</p>
   <p class="f3">free for personal and trial use.<br>commercial use needs a licence.<br>read the <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">licence</a><br>© 2026 <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </footer>
 
 <script>
 /* ---------------- type controls ---------------- */
-const S={wght:400,wdth:100,slnt:0,adapt:true};
+const S={wght:400,wdth:100,slnt:0,size:120,adapt:true};
 const $=id=>document.getElementById(id);
 const stage=$('stage');
 const fvs=(w,d)=>`"wght" ${w}, "wdth" ${d}, "slnt" ${-S.slnt}`;
@@ -227,11 +233,14 @@ function fillTo(el){
 document.querySelectorAll('.rng[data-marks]').forEach(r=>{const el=r.querySelector('input');
   r.dataset.marks.split(',').forEach(v=>{const t=document.createElement('span');t.className='tick';t.dataset.v=v;
     const p=(v-el.min)/(el.max-el.min);t.style.left=`calc(7px + (100% - 14px) * ${p})`;r.appendChild(t)})});
+function autoVals(){   // the size and width auto chose for the first line, for the dimmed sliders
+  const l=stage.firstElementChild, m=l&&l.style.fontVariationSettings.match(/"wdth" ([\d.]+)/);
+  return {size:Math.round(Math.min(300,Math.max(12,parseFloat(l&&l.style.fontSize)||120))), wdth:m?Math.round(+m[1]):100}}
 function layout(){
   const W=(stage.clientWidth-32)*(1-0.06*S.slnt/12);
   [...stage.children].forEach(el=>{
     if(S.adapt) fitLine(el,W);
-    else{el.style.fontSize='';el.style.whiteSpace='';el.style.width='';el.style.fontVariationSettings=fvs(S.wght,S.wdth)}
+    else{el.style.fontSize=S.size+'px';el.style.whiteSpace='';el.style.width='';el.style.fontVariationSettings=fvs(S.wght,S.wdth)}
   });
   if(S.adapt){                      // wrapped (long) lines grow until the text fills the box
     const wrapped=[...stage.children].filter(el=>el.textContent&&el.style.whiteSpace!=='pre');
@@ -252,7 +261,8 @@ function layout(){
   }
   document.querySelectorAll('.cells div').forEach(c=>c.style.fontVariationSettings=fvs(S.wght,S.wdth));
   $('wghtv').textContent=S.wght; $('wght').value=S.wght;
-  $('wdth').parentElement.classList.toggle('auto',S.adapt); $('wdthv').textContent=S.adapt?'':S.wdth;
+  $('wdth').parentElement.classList.toggle('auto',S.adapt); const A=S.adapt?autoVals():S; $('wdthv').textContent=S.adapt?'':S.wdth; $('wdth').value=A.wdth;
+  $('size').parentElement.classList.toggle('auto',S.adapt); $('sizev').textContent=S.adapt?'':S.size+'px'; $('size').value=A.size;
   $('slntv').textContent=S.slnt+'°'; $('adapt').setAttribute('aria-pressed',S.adapt);
   document.querySelectorAll('input[type=range]').forEach(fillTo);
 }
@@ -263,7 +273,10 @@ function snap(el){const lo=+el.min,hi=+el.max,v=+el.value;
   for(const m of marks){if(Math.abs(v-m)<=(hi-lo)*0.015){el.value=m;return +el.value}}   // gently onto a marker
   return v}
 $('wght').oninput=e=>{S.wght=snap(e.target);layout()};
-$('wdth').oninput=e=>{S.adapt=false;S.wdth=snap(e.target);layout()};   // taking the slider switches auto off
+// auto fits size and width to the box; taking either slider switches auto off, starting from what auto had chosen
+function manual(){if(!S.adapt)return; const a=autoVals(); S.size=a.size; S.wdth=a.wdth; S.adapt=false}
+$('wdth').oninput=e=>{const v=snap(e.target);manual();S.wdth=v;layout()};
+$('size').oninput=e=>{const v=snap(e.target);manual();S.size=v;layout()};
 $('slnt').oninput=e=>{S.slnt=snap(e.target);layout()};
 $('adapt').onclick=()=>{S.adapt=!S.adapt;layout()};
 // the typing box is plain text: block the browser's faux bold / italic / underline shortcuts
@@ -282,7 +295,7 @@ const GROUPS=[
  ['accents & modifiers','^`´¨¯¸ˆ˜ʹʼ'],
  ['accented uppercase','ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØŒŠÙÚÛÜÝŸŽÞČĐŊŦƷǮǦǤǨŃẞ'],
  ['accented lowercase','àáâãäåæçèéêëìíîïıðñòóôõöøœšßùúûüýÿžþµčđŋŧʒǯǧǥǩńĸ'],
- ['arrows','←↑→↓↖↗↘↙'],
+ ['arrows','←↑→↓↖↗↘↙↻'],
  ['ligatures',['fi','fl','ff']]];
 const CS=$('charsets');
 for(const [name,chars] of GROUPS){
