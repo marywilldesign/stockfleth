@@ -9,11 +9,11 @@
 html{transition:none}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--fg)}
-body{font:600 13px/1.45 Stockfleth,ui-monospace,Menlo,monospace;min-height:100vh}
+body{font:800 15px/1.45 Stockfleth,ui-monospace,Menlo,monospace;min-height:100vh}
 .bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:2px solid var(--fg);
      display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;padding:12px 20px}
 .grp{display:flex;align-items:center;gap:8px}
-.lbl{font-weight:800;letter-spacing:.04em}
+.lbl{font-weight:1000;letter-spacing:.04em}
 input[type=range]{width:150px;accent-color:var(--fg)}
 input[type=range]:disabled{opacity:.35}
 .val{min-width:34px;font-variant-numeric:tabular-nums}
@@ -40,7 +40,7 @@ h3{font-size:11px;font-weight:700;letter-spacing:.04em;margin:18px 0 8px}h3 span
 .cells.wide div{width:138px}
 .cells{display:flex;flex-wrap:wrap;padding:2px 0 0 2px;margin-bottom:8px}
 .cells div{width:70px;border:2px solid var(--fg);margin:-2px 0 0 -2px;height:124px;padding-top:22px;display:flex;align-items:center;justify-content:center;font-family:Stockfleth,ui-monospace,Menlo,Consolas,monospace;font-size:50px;line-height:1;position:relative;overflow:hidden}
-.cells small{position:absolute;left:0;top:0;right:0;z-index:2;padding:3px 4px;background:var(--bg);font:500 10px Stockfleth,ui-monospace,monospace;color:color-mix(in srgb,var(--fg) 65%,var(--bg))}
+.cells small{position:absolute;left:0;top:0;right:0;z-index:2;padding:3px 4px;background:var(--bg);font:900 10px Stockfleth,ui-monospace,monospace;color:color-mix(in srgb,var(--fg) 65%,var(--bg))}
 .dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;border-left:1.5px solid var(--fg);border-top:1.5px solid var(--fg);margin:0 0 30px}
 .dl a{display:block;padding:14px 16px;border-right:1.5px solid var(--fg);border-bottom:1.5px solid var(--fg);color:var(--fg);text-decoration:none}
 .dl a:hover,.dl a:focus-visible{background:var(--fg);color:var(--bg);outline:none}
@@ -50,18 +50,18 @@ h2{font-size:12px;font-weight:700;letter-spacing:.04em;margin:0 0 10px}
 footer{border-top:2px solid var(--fg);padding:16px 20px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer a{color:var(--fg)}
 @media (max-width:700px){input[type=range]{width:110px}.bar{padding:10px 16px}main{padding:16px}}
-.intro{--h:clamp(40px,7vw,92px);padding:22px 20px 18px;display:grid;grid-template-columns:auto auto;gap:8px 40px;align-items:start;justify-content:space-between}
-.intro h1{margin:0;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-weight:400;font-variation-settings:"wght" 800,"wdth" 100;font-size:var(--h);line-height:.9;letter-spacing:0}
+.intro{--h:111px;padding:22px 20px 18px;display:grid;grid-template-columns:auto auto;gap:8px 40px;align-items:start;justify-content:space-between}
+.intro h1{margin:0;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-weight:400;font-variation-settings:"wght" 1000,"wdth" 100;font-size:var(--h);line-height:.9;letter-spacing:0}
 .intro .by{margin:8px 0 0}
 .intro .by a{color:var(--fg)}
-.intro p.pre{margin:0;font-size:calc(var(--h) * .9 / 4 / 1.25);line-height:1.25;white-space:nowrap;height:calc(var(--h) * .9);display:flex;flex-direction:column;justify-content:space-between}
+.intro p.pre{margin:0;font-size:20px;font-weight:800;line-height:25px;white-space:nowrap;height:calc(var(--h) * .9);display:flex;flex-direction:column;justify-content:space-between}
 .intro p.pre span{display:block}
-@media (max-width:1100px){.intro{grid-template-columns:1fr}.intro p.pre{font-size:13px;line-height:1.5;white-space:normal;height:auto;display:block}.intro p.pre span{display:inline}.intro p.pre span::after{content:" "}}
+@media (max-width:1400px){.intro{--h:clamp(48px,10vw,111px);grid-template-columns:1fr}.intro p.pre{font-size:20px;line-height:25px;white-space:normal;height:auto;display:block}.intro p.pre span{display:inline}.intro p.pre span::after{content:" "}}
 ::selection{background:var(--fg);color:var(--bg)}
 </style></head><body>
 <header class="intro">
-  <div><h1>STOCKFLETH</h1><p class="by">font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p></div>
-  <p class="pre"><span>a mono font drawn line by line on a 5 × 9 grid.</span><span>variable and adaptive: weight, width, italic.</span><span>for code and for display.</span><span>fluent in the nordic languages and every latin-script sámi language.</span></p>
+  <div><h1>stockfleth</h1><p class="by">font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p></div>
+  <p class="pre"><span>a mono font drawn line by line on a 5 × 9 grid.</span><span>variable and adaptive: weight, width, italic.</span><span>for code and for display.</span><span>fluent in the nordic and latin-script sámi languages.</span></p>
 </header>
 <div class="bar" role="toolbar" aria-label="stockfleth controls">
   <div class="grp"><span class="lbl">weight</span><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"><span class="val" id="wghtv">400</span></div>
@@ -74,7 +74,7 @@ footer a{color:var(--fg)}
   <span class="sep"></span>
   <div class="grp"><span class="lbl">text</span><input id="fg" type="color" value="#1f3fd1" aria-label="text colour">
     <span class="lbl">bg</span><input id="bg" type="color" value="#f4f1ea" aria-label="background colour">
-    <button id="swap" title="swap text and background">⇄</button></div>
+    <button id="swap" title="swap text and background" aria-label="swap text and background"><svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" style="display:block"><path d="M1 4.5h16M13.5 1l3.5 3.5-3.5 3.5M19 9.5H3M6.5 6L3 9.5 6.5 13" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="square"/></svg></button></div>
   <div class="grp"><span class="lbl">harmony</span>
     <select id="mode" aria-label="colour harmony"><option value="free">free</option><option value="analogous" selected>analogous</option><option value="complementary">complementary</option></select>
     <span class="badge" id="ratio">—</span></div>
