@@ -2,7 +2,7 @@
 
 A variable monospace typeface drawn on a 5 × 9 module grid.
 
-**Live specimen:** https://marywilldesign.github.io/stockfleth/
+**Live specimen:** https://marywildesign.com/stockfleth/
 
 ## Axes
 
