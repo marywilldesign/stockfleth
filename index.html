@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en" class="loading"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>stockfleth</title>
 <meta name="description" content="stockfleth: a variable and adaptive mono font drawn line by line on a 5 × 9 grid. weight, width, italic. fluent in the nordic and latin-script sámi languages. by marywildesign.">
+<link rel="preload" href="fonts/Stockfleth-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="canonical" href="https://marywildesign.com/stockfleth/">
 <meta property="og:type" content="website">
@@ -19,11 +20,12 @@
 <meta name="twitter:description" content="a mono font drawn line by line on a 5 × 9 grid, by marywildesign.">
 <meta name="twitter:image" content="https://marywildesign.com/stockfleth/og-image.png">
 <style>
-@font-face{font-family:Stockfleth;src:url(fonts/Stockfleth-VF.woff2) format("woff2"),url(fonts/Stockfleth-VF.ttf) format("truetype");font-weight:100 1000;font-stretch:70% 145%;font-style:normal;font-display:swap}
+@font-face{font-family:Stockfleth;src:url(fonts/Stockfleth-VF.woff2) format("woff2"),url(fonts/Stockfleth-VF.ttf) format("truetype");font-weight:100 1000;font-stretch:70% 145%;font-style:normal;font-display:block}
+html.loading body{visibility:hidden}
 :root{--fg:#1f3fd1;--bg:#eef0fb;--pad:20px;--gut:20px}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--fg)}
-body{font:800 15px/1.45 Stockfleth,ui-monospace,Menlo,monospace;min-height:100vh}
+body{font:800 15px/1.45 Stockfleth;min-height:100vh}
 a{color:var(--fg);text-decoration-thickness:1px;text-underline-offset:3px}
 a:not(.dl a):hover{font-weight:1000}
 ::selection{background:var(--fg);color:var(--bg)}
@@ -38,7 +40,7 @@ a:not(.dl a):hover{font-weight:1000}
 
 /* header */
 header.intro{padding-top:22px;padding-bottom:20px;align-items:end}
-.intro h1{grid-column:1/-1;margin:0;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-weight:400;font-variation-settings:"wght" 1000,"wdth" 100;font-size:clamp(56px,9vw,128px);line-height:.85}
+.intro h1{grid-column:1/-1;margin:0;font-family:Stockfleth;font-weight:400;font-variation-settings:"wght" 1000,"wdth" 100;font-size:clamp(56px,9vw,128px);line-height:.85}
 .intro .sub{grid-column:1/-1;margin:14px 0 0;font-size:20px;line-height:25px}
 
 /* controls: label above control, one block per column span */
@@ -47,7 +49,7 @@ div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px soli
 .ctl .top{display:flex;justify-content:space-between;gap:8px;white-space:nowrap}
 .ctl .row,.ctl .rng{display:flex;gap:8px;align-items:center;height:36px}
 .ctl select{height:36px}
-.s-weight{grid-column:1/3}.s-width{grid-column:3/5}.s-slant{grid-column:5/7}.s-fit{grid-column:7/8}.s-colours{grid-column:8/9}
+.s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:5/7}.s-fit{grid-column:7/8}.s-colours{grid-column:8/9}
 .lbl,.val,.badge,.sub,.section>h2,.grow h3,footer.g8,.dl a span,.cap{text-transform:uppercase;letter-spacing:.06em}
 .lbl{font-weight:1000}
 .val{font-variant-numeric:tabular-nums}
@@ -62,14 +64,14 @@ select option{color:#000;background:#fff}
 button[aria-pressed=true],button:hover{background:var(--fg);color:var(--bg)}
 input[type=color]{width:36px;height:36px;padding:0;border:1.5px solid var(--fg);background:none;cursor:pointer}
 .badge{font-variant-numeric:tabular-nums;white-space:nowrap}
-.badge .mk{font-family:Stockfleth,ui-monospace,Menlo,monospace;font-variation-settings:"wght" 700;font-size:1.25em;vertical-align:-.08em;margin-left:.25em}
+.badge .mk{font-family:Stockfleth;font-variation-settings:"wght" 700;font-size:1.25em;vertical-align:-.08em;margin-left:.25em}
 .badge.fail{text-decoration:underline;text-underline-offset:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* stage */
 main.g8{padding-top:22px}
 #stage{grid-column:1/-1;border:1px solid var(--fg);padding:16px 16px 22px;height:60vh;min-height:280px;overflow:auto;margin-bottom:34px;scrollbar-width:thin}
-.line{display:block;width:100%;white-space:pre-wrap;overflow-wrap:anywhere;outline:none;font-family:Stockfleth,ui-monospace,Menlo,Consolas,monospace;
+.line{display:block;width:100%;white-space:pre-wrap;overflow-wrap:anywhere;outline:none;font-family:Stockfleth;
       /* 1.26: every descender (j, g, p, y, ŋ) and accent sits inside its own line box, so highlighting never clips glyphs */
       line-height:1.26;font-size:min(12vw,150px);min-height:1.26em;caret-color:var(--fg)}
 
@@ -80,12 +82,12 @@ main.g8{padding-top:22px}
 .grow h3{grid-column:1/3;font-size:15px;font-weight:1000;margin:0}.grow h3 span{opacity:.55;font-weight:800;margin-left:6px}
 .cells{grid-column:3/9;display:flex;flex-wrap:wrap;padding:1px 0 0 1px}
 .cells.wide div{width:138px}
-.cells div{width:70px;border:1px solid var(--fg);margin:-1px 0 0 -1px;height:124px;padding-top:22px;display:flex;align-items:center;justify-content:center;font-family:Stockfleth,ui-monospace,Menlo,Consolas,monospace;font-size:50px;line-height:1;position:relative;overflow:hidden}
-.cells small{position:absolute;left:0;top:0;right:0;z-index:2;padding:3px 4px;background:var(--bg);font:900 12px Stockfleth,ui-monospace,monospace;color:color-mix(in srgb,var(--fg) 65%,var(--bg))}
+.cells div{width:70px;border:1px solid var(--fg);margin:-1px 0 0 -1px;height:124px;padding-top:22px;display:flex;align-items:center;justify-content:center;font-family:Stockfleth;font-size:50px;line-height:1;position:relative;overflow:hidden}
+.cells small{position:absolute;left:0;top:0;right:0;z-index:2;padding:3px 4px;background:var(--bg);font:900 12px Stockfleth;color:color-mix(in srgb,var(--fg) 65%,var(--bg))}
 .dl{grid-column:3/9;display:grid;grid-template-columns:subgrid}
 .dl a{grid-column:span 2;display:block;padding:14px 16px 16px;border:1px solid var(--fg);text-decoration:none;min-height:150px}
 .dl a:hover,.dl a:focus-visible{background:var(--fg);color:var(--bg);outline:none}
-.dl b{display:block;font-family:Stockfleth,ui-monospace,Menlo,monospace;font-size:30px;font-weight:400;font-variation-settings:"wght" 900;margin-bottom:10px}
+.dl b{display:block;font-family:Stockfleth;font-size:30px;font-weight:400;font-variation-settings:"wght" 900;margin-bottom:10px}
 
 /* footer on the same columns */
 footer.g8{border-top:1px solid var(--fg);padding-top:18px;padding-bottom:30px;row-gap:20px}
@@ -96,7 +98,7 @@ footer .k{font-weight:1000}
 /* tablet: 4 columns */
 @media (max-width:1100px){
   .g8,.section,.grow,.dl{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .s-weight{grid-column:1/3}.s-width{grid-column:3/5}.s-slant{grid-column:1/3}.s-fit{grid-column:3/4}.s-colours{grid-column:4/5}
+  .s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:1/3}.s-fit{grid-column:3/4}.s-colours{grid-column:4/5}
   .grow h3,.cells{grid-column:1/-1}.grow h3{margin-bottom:8px}
   .dl{grid-column:1/-1}.dl a{grid-column:span 2}
   .f1{grid-column:1/3}.f2{grid-column:3/5}.f3{grid-column:1/3}.f4{grid-column:3/5}
@@ -110,15 +112,15 @@ footer .k{font-weight:1000}
   .f1,.f2,.f3,.f4{grid-column:1/-1}
   .bar{position:static}
 }
-</style></head><body>
+</style><noscript><style>html.loading body{visibility:visible}</style></noscript></head><body>
 <header class="g8 intro">
   <h1>stockfleth</h1>
   <p class="sub">variable and adaptive mono font by <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </header>
 <div class="g8 bar" role="toolbar" aria-label="stockfleth controls">
   <div class="ctl s-weight"><div class="top"><span class="lbl">weight</span><span class="val" id="wghtv">400</span></div><div class="rng"><input id="wght" type="range" min="100" max="1000" value="400" aria-label="weight"></div></div>
-  <div class="ctl s-width"><div class="top"><span class="lbl">width</span><span class="val" id="wdthv">100</span></div><div class="rng"><input id="wdth" type="range" min="70" max="145" value="100" aria-label="width"></div></div>
   <div class="ctl s-slant"><div class="top"><span class="lbl">slant</span><span class="val" id="slntv">0°</span></div><div class="rng"><input id="slnt" type="range" min="0" max="12" step="0.5" value="0" aria-label="slant in degrees"></div></div>
+  <div class="ctl s-width"><div class="top"><span class="lbl">width</span><span class="val" id="wdthv">100</span></div><div class="rng"><input id="wdth" type="range" min="70" max="145" value="100" aria-label="width"></div></div>
   <div class="ctl s-fit"><div class="top"><span class="lbl">fit</span></div><div class="row">
     <button id="adapt" aria-pressed="true" title="each line stretches and scales to fill the box">adaptive</button></div></div>
   <div class="ctl s-colours"><div class="top"><span class="lbl">colours</span></div><div class="row">
@@ -320,5 +322,8 @@ function apply(){
 }
 $('refresh').onclick=refreshColours;
 lastFam=Math.floor(Math.random()*FAMILIES.length); refreshColours();
-document.fonts.ready.then(()=>{apply();layout()});
+/* reveal the page only once Stockfleth is ready, so no other font is ever shown */
+const reveal=()=>document.documentElement.classList.remove('loading');
+document.fonts.load('800 15px Stockfleth').then(()=>document.fonts.ready).then(()=>{apply();layout();reveal()});
+setTimeout(reveal,2500);
 </script></body></html>
