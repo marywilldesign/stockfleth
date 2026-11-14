@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="loading"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>stockfleth typeface — marywildesign</title>
-<meta name="description" content="stockfleth: a variable mono font drawn line by line on a 5 × 9 grid. weight, width, italic. fluent in european and latin-script sámi languages. by marywildesign.">
+<meta name="description" content="stockfleth: a variable mono font drawn line by line on a 5 × 9 grid. weight, width, italic. fluent in latin-script european and sámi languages. by marywildesign.">
 <link rel="preload" href="fonts/Stockfleth-VF.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="canonical" href="https://marywildesign.com/stockfleth/">
@@ -10,7 +10,7 @@
 <meta name="author" content="marywildesign">
 <meta property="og:site_name" content="marywildesign">
 <meta property="og:title" content="stockfleth: variable mono font">
-<meta property="og:description" content="a mono font drawn line by line on a 5 × 9 grid. variable: weight, width, italic. fluent in european and latin-script sámi languages. by marywildesign.">
+<meta property="og:description" content="a mono font drawn line by line on a 5 × 9 grid. variable: weight, width, italic. fluent in latin-script european and sámi languages. by marywildesign.">
 <meta property="og:url" content="https://marywildesign.com/stockfleth/">
 <meta property="og:image" content="https://marywildesign.com/stockfleth/og-image.png?v=4">
 <meta property="og:image:secure_url" content="https://marywildesign.com/stockfleth/og-image.png?v=4">
@@ -132,8 +132,8 @@ main.g8{padding-top:22px}
 .dl b{display:block;font-family:Stockfleth;font-size:30px;font-weight:400;font-variation-settings:"wght" 900;margin-bottom:10px}
 
 /* footer on the same columns */
-footer.g8{border-top:1px solid var(--fg);padding-top:18px;padding-bottom:30px;display:flex;justify-content:space-between;gap:20px var(--gut)}
-footer p{margin:0}
+footer.g8{border-top:1px solid var(--fg);padding-top:18px;padding-bottom:30px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px var(--gut)}
+footer p{margin:0;flex:0 0 auto}   /* each block keeps its natural width, so its four lines never wrap on wide screens */
 /* paragraph tester: every downloadable style, at any size */
 .tester .tbar{grid-column:3/9;display:grid;grid-template-columns:subgrid;row-gap:12px;margin-bottom:22px}
 .t-style{grid-column:1/3}.t-size{grid-column:3/5}.t-align{grid-column:5/7}.t-deco{grid-column:1/3}.t-caps{grid-column:3/5}
@@ -202,13 +202,13 @@ footer .k{font-weight:1000}
   <section class="section" aria-labelledby="download"><h2 class="lab" id="download" style="grid-column:1/3">download <span aria-hidden="true">↘</span></h2>
     <div class="dl">
       <a href="fonts/Stockfleth-VF.ttf" download><b>variable ttf</b><span>one file, every weight, width and <em class="it">italic</em>. for figma, adobe, macos, windows.</span></a>
-      <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (50 kb).</span></a>
+      <a href="fonts/Stockfleth-VF.woff2" download><b>variable woff2</b><span>the same font, compressed for websites (76 kb).</span></a>
       <a href="fonts/Stockfleth-static-otf.zip" download><b>static otf</b><span>20 styles, thin to extrablack, upright and <em class="it">italic</em>. for apps without variable font support.</span></a>
     </div></section>
 </main>
 <footer class="g8">
   <p class="f1"><span class="k">stockfleth:</span><br>characters (361)<br><span class="nw">wght (100–1000) ·</span> <span class="nw">wdth (70–145)</span><br><em class="it">italic</em>, mono</p>
-  <p class="f2"><span class="nw">a mono font drawn line by line</span> <span class="nw">on a 5 × 9 grid.</span><br><span class="nw">variable: weight,</span> <span class="nw">width, <em class="it">italic</em>.</span><br><span class="nw">good for display</span> <span class="nw">and tech docs.</span><br><span class="nw">fluent in european and</span> <span class="nw">latin-script sámi languages.</span></p>
+  <p class="f2"><span class="nw">a mono font drawn line by line</span> <span class="nw">on a 5 × 9 grid.</span><br><span class="nw">variable: weight,</span> <span class="nw">width, <em class="it">italic</em>.</span><br><span class="nw">good for display</span> <span class="nw">and tech docs.</span><br><span class="nw">fluent in latin-script</span> <span class="nw">european and sámi languages.</span></p>
   <p class="f3"><span class="nw">free for personal</span> <span class="nw">and trial use.</span><br><span class="nw"><a href="mailto:marywildesign@gmail.com?subject=Stockfleth%20commercial%20licence">contact me</a></span> <span class="nw">for commercial use.</span><br>read the <a href="https://github.com/marywilldesign/stockfleth/blob/main/LICENSE.md">licence</a><br>© 2026 <a href="https://marywildesign.com" rel="noopener">marywildesign</a></p>
 </footer>
 
