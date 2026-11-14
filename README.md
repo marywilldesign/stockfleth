@@ -20,13 +20,21 @@ Named styles (Google Fonts names): Thin, ExtraLight, Light, Regular, Medium, Sem
 
 **Small capitals** (`font-variant-caps: small-caps` or `all-small-caps`, OpenType `smcp` / `c2sc`): the capitals redrawn at x-height with full-weight strokes, so they don't look pale like a browser's fake small caps. **Underline and strikethrough** positions and thicknesses are set in the font (80% of the letter stroke) and follow the weight. On the web, browsers draw their own heavier lines unless you add `text-decoration-thickness: from-font`.
 
+## Works everywhere
+
+- **Design apps** (Figma, Adobe, Affinity, Sketch, Canva uploads): the variable TTF, or any static style.
+- **Word, PowerPoint, Excel, Pages, Keynote**: install the static TTFs. Office has limited variable-font support, and on Windows it only embeds TrueType fonts in documents.
+- **PDFs and shared documents**: the fonts allow editable embedding, so exported PDFs and saved Word, PowerPoint or Keynote files carry the font and stay editable for whoever opens them.
+- **Websites**: the WOFF2 (see below).
+- **Google Docs and Slides**: only offer Google's own font library, so no custom font can be used there.
+
 ## Files
 
 | file | use |
 |---|---|
 | `fonts/Stockfleth-VF.ttf` | variable font for desktop apps (Figma, Adobe, macOS, Windows) |
 | `fonts/Stockfleth-VF.woff2` | variable font for the web |
-| `fonts/Stockfleth-static-otf.zip` | 20 static OTFs for apps without variable-font support |
+| `fonts/Stockfleth-static.zip` | the 20 static styles (Thin to ExtraBlack, upright and italic), as OTF and TTF. Use the TTFs in Word, PowerPoint and other Office apps: they embed in documents. |
 
 ### Web use
 

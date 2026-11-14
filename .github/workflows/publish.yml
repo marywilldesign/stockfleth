@@ -43,7 +43,7 @@ jobs:
       - name: stamp font links with a version
         run: |
           v=$(git rev-parse --short HEAD)
-          find _site -name '*.html' -exec sed -i -E "s#(Stockfleth-VF\.(woff2|ttf)|Stockfleth-static-otf\.zip)([\")])#\1?v=$v\3#g" {} +
+          find _site -name '*.html' -exec sed -i -E "s#(Stockfleth-VF\.(woff2|ttf)|Stockfleth-static\.zip)([\")])#\1?v=$v\3#g" {} +
 
       - uses: actions/setup-node@v4
         with:
