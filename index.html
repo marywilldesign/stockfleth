@@ -434,12 +434,9 @@ STYLES.forEach(([w,n])=>[0,12].forEach(sl=>{const o=document.createElement('opti
   o.textContent=sl?(n==='regular'?'italic':n+' italic'):n; if(w===400&&!sl)o.selected=true; $('tstyle').appendChild(o)}));
 function tester(){const [w,sl]=$('tstyle').value.split(',').map(Number), fs=getVal($('tsize')), p=$('tpara');
   p.style.fontVariationSettings=`"wght" ${w}, "wdth" 100, "slnt" ${-sl}`; p.style.fontSize=fs+'px';
-  // underline / strike / wavy / dotted use the font's own thickness (half the letter stroke). browsers won't
-  // draw a line thinner than 1px, so when the font's line would be thinner than that, draw it a little
-  // lighter: a solid 70% mix of the text colour into the background (opaque, not see-through)
-  const line=Math.max(5,Math.round((0.10+0.50*(w-100)/900)*50))/1000*fs;   // the font's line thickness in px
+  // underline / strike / wavy / dotted use the font's own thickness (80% of the letter stroke), in full
+  // colour, not the browser's default (a tenth of the text size). browsers never go below 1px.
   p.style.textDecorationThickness='from-font';
-  p.style.textDecorationColor=line<1?'color-mix(in srgb, currentColor 70%, var(--bg))':'';
   $('tsizev').textContent=fs+'px'; fillTo($('tsize'))}
 // each button group (align, line, caps) is a pick-one: press one, the others in that group let go
 function group(id,apply){const bs=[...$(id).querySelectorAll('button')];
