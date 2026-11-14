@@ -434,12 +434,19 @@ STYLES.forEach(([w,n])=>[0,12].forEach(sl=>{const o=document.createElement('opti
   o.textContent=sl?(n==='regular'?'italic':n+' italic'):n; if(w===400&&!sl)o.selected=true; $('tstyle').appendChild(o)}));
 function tester(){const [w,sl]=$('tstyle').value.split(',').map(Number), fs=getVal($('tsize')), p=$('tpara');
   p.style.fontVariationSettings=`"wght" ${w}, "wdth" 100, "slnt" ${-sl}`; p.style.fontSize=fs+'px';
+  // underline / strike / wavy / dotted use the font's own thickness (half the letter stroke). browsers won't
+  // draw a line thinner than 1px, so when the font's line would be thinner than that, fade it by the same
+  // amount: a 0.3px line becomes a 1px line at 30% colour, which reads as thin as it should
+  const line=Math.max(5,Math.round((0.10+0.50*(w-100)/900)*50))/1000*fs;   // the font's line thickness in px
+  p.style.textDecorationThickness='from-font';
+  p.style.textDecorationColor=line<1?`color-mix(in srgb, currentColor ${Math.round(Math.max(0.3,line)*100)}%, transparent)`:'';
   $('tsizev').textContent=fs+'px'; fillTo($('tsize'))}
 // each button group (align, line, caps) is a pick-one: press one, the others in that group let go
 function group(id,apply){const bs=[...$(id).querySelectorAll('button')];
   bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.setAttribute('aria-pressed',x===b));apply(b)})}
 group('align',b=>$('tpara').style.textAlign=b.dataset.a);
-group('deco',b=>$('tpara').style.textDecoration=b.dataset.d);           // underline, strikethrough, wavy, dotted
+group('deco',b=>{const [line,style]=b.dataset.d.split(' '), p=$('tpara');   // underline, strikethrough, wavy, dotted
+  p.style.textDecorationLine=line; p.style.textDecorationStyle=style||'solid'});      // line + style only, so thickness and fade stay
 group('caps',b=>$('tpara').style.fontVariantCaps=b.dataset.c);          // uses the font's own small capitals
 $('tstyle').onchange=tester; $('tsize').oninput=e=>{snap(e.target);tester()}; tester();
 
