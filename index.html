@@ -95,7 +95,10 @@ select option{color:#000;background:#fff}
 /* the style list opens upwards, so its marker is the font's own ↖ instead of a down chevron */
 .selwrap{position:relative}.selwrap select{background-image:none}
 .selwrap::after{content:"↖";position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;font-family:Stockfleth;font-size:20px;line-height:1;color:var(--fg)}
-button[aria-pressed=true],button:hover{background:var(--fg);color:var(--bg)}
+button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+/* hover fill only where there's a real pointer: phones keep a tapped button "hovered", so fit
+   looked switched on even after tapping it off */
+@media (hover:hover){button:hover{background:var(--fg);color:var(--bg)}}
 input[type=color]{width:36px;height:36px;padding:0;border:1.5px solid var(--fg);background:none;cursor:pointer}
 .badge{font-variant-numeric:tabular-nums;white-space:nowrap}
 .badge .mk{font-family:Stockfleth;font-variation-settings:"wght" 700;font-size:1.25em;vertical-align:-.08em;margin-left:.25em}
