@@ -2,7 +2,7 @@
 
 Copyright © 2026 marywildesign (https://marywildesign.com). All rights reserved, apart from what this licence lets you do.
 
-"The font" here means the Stockfleth font files in this repository (the variable TTF and WOFF2 and the static OTFs), any instances made from them.
+"The font" here means the Stockfleth font files in this repository (the variable TTF and WOFF2 and the static OTFs and TTFs) and any instances made from them.
 
 ## Free for personal use and trials
 
@@ -28,7 +28,7 @@ If you're not sure whether your use counts, ask. You can reach me through https:
 
 ## What you can't do
 
-- Sell, sublicense, rent or share the font, on their own or bundled with anything else, changed or unchanged.
+- Sell, sublicense, rent or share the font, on its own or bundled with anything else, changed or unchanged.
 - Release a font made by modifying Stockfleth, or publish the font under another name.
 - Remove or change the copyright and licence information inside the font files.
 
