@@ -136,7 +136,8 @@ footer.g8{border-top:1px solid var(--fg);padding-top:18px;padding-bottom:30px;di
 footer p{margin:0}
 /* paragraph tester: every downloadable style, at any size */
 .tester .tbar{grid-column:3/9;display:grid;grid-template-columns:subgrid;row-gap:12px;margin-bottom:22px}
-.t-style{grid-column:1/3}.t-size{grid-column:3/5}.t-align{grid-column:5/7}
+.t-style{grid-column:1/3}.t-size{grid-column:3/5}.t-align{grid-column:5/7}.t-deco{grid-column:1/3}.t-caps{grid-column:3/5}
+.cells.sc .g{font-variant-caps:small-caps}   /* the small caps row shows the smcp letters */
 .seg{display:flex}.seg button{flex:1 1 0;min-width:0;padding:0 4px;margin-left:-1px}.seg button:first-child{margin-left:0}
 .seg svg{display:block;margin:auto;stroke:currentColor;stroke-width:1.5;stroke-linecap:butt;fill:none;overflow:visible}
 #tpara{grid-column:3/9;margin:0 0 8px;font-family:Stockfleth;font-size:24px;line-height:max(1.26em,calc(1.15em + 5px));max-width:100%;overflow-wrap:anywhere}
@@ -149,7 +150,7 @@ footer .k{font-weight:1000}
   .g8,.section,.grow,.dl{grid-template-columns:repeat(4,minmax(0,1fr))}
   .s-weight{grid-column:1/3}.s-slant{grid-column:3/5}.s-width{grid-column:1/3}.s-size{grid-column:3/5}
   .tester .tbar,#tpara{grid-column:1/-1}
-  .t-style{grid-column:1/3}.t-size{grid-column:3/5}.t-align{grid-column:1/3}
+  .t-style{grid-column:1/3}.t-size{grid-column:3/5}.t-align{grid-column:1/3}.t-deco{grid-column:3/5}.t-caps{grid-column:1/3}
   .colour{grid-column:1/-1}.intro h1{grid-row:2}.intro .sub{grid-row:3}
   .grow h3,.cells{grid-column:1/-1}.grow h3{margin-bottom:8px}
   .dl{grid-column:1/-1}.dl a{grid-column:span 2}
@@ -160,7 +161,7 @@ footer .k{font-weight:1000}
   :root{--pad:16px;--gut:14px}
   .g8,.section,.grow,.dl{grid-template-columns:repeat(2,minmax(0,1fr))}
   .s-weight,.s-width,.s-slant,.s-size{grid-column:1/-1}
-  .t-style,.t-size,.t-align{grid-column:1/-1}
+  .t-style,.t-size,.t-align,.t-deco,.t-caps{grid-column:1/-1}
   .colour{white-space:normal;font-size:16px;line-height:21px;justify-self:start;justify-content:flex-start;align-items:center;text-align:left;grid-row:3;margin-top:14px;gap:14px}
   .colour #refresh{order:-1;font-size:34px}   /* on a phone the arrow comes first and bigger, right under the thumb */
   .intro h1{grid-row:1}.intro .sub{grid-row:2}
@@ -190,8 +191,12 @@ footer .k{font-weight:1000}
     <div class="tbar">
       <div class="ctl t-style"><div class="top"><span class="lbl">style</span></div><div class="selwrap"><select id="tstyle" aria-label="style"></select></div></div>
       <div class="ctl t-size"><div class="top"><span class="lbl">size</span><span class="val" id="tsizev">24px</span></div><div class="rng" data-marks="32,56,80,104,128,152,176"><input id="tsize" type="range" min="8" max="200" value="24" aria-label="paragraph size in pixels"></div></div>
-      <div class="ctl t-align"><div class="top"><span class="lbl">align</span></div><div class="seg" role="group" aria-label="paragraph alignment">
+      <div class="ctl t-align"><div class="top"><span class="lbl">align</span></div><div class="seg" id="align" role="group" aria-label="paragraph alignment">
         <button data-a="left" aria-pressed="true" aria-label="left" title="left"><svg viewBox="0 0 18 14" width="18" height="14" aria-hidden="true"><line x1="0" x2="18" y1="1" y2="1"/><line x1="0" x2="11" y1="5" y2="5"/><line x1="0" x2="15" y1="9" y2="9"/><line x1="0" x2="8" y1="13" y2="13"/></svg></button><button data-a="center" aria-pressed="false" aria-label="centre" title="centre"><svg viewBox="0 0 18 14" width="18" height="14" aria-hidden="true"><line x1="0.0" x2="18.0" y1="1" y2="1"/><line x1="3.5" x2="14.5" y1="5" y2="5"/><line x1="1.5" x2="16.5" y1="9" y2="9"/><line x1="5.0" x2="13.0" y1="13" y2="13"/></svg></button><button data-a="right" aria-pressed="false" aria-label="right" title="right"><svg viewBox="0 0 18 14" width="18" height="14" aria-hidden="true"><line x1="0" x2="18" y1="1" y2="1"/><line x1="7" x2="18" y1="5" y2="5"/><line x1="3" x2="18" y1="9" y2="9"/><line x1="10" x2="18" y1="13" y2="13"/></svg></button><button data-a="justify" aria-pressed="false" aria-label="justify" title="justify"><svg viewBox="0 0 18 14" width="18" height="14" aria-hidden="true"><line x1="0" x2="18" y1="1" y2="1"/><line x1="0" x2="18" y1="5" y2="5"/><line x1="0" x2="18" y1="9" y2="9"/><line x1="0" x2="18" y1="13" y2="13"/></svg></button></div></div>
+      <div class="ctl t-deco"><div class="top"><span class="lbl">line</span></div><div class="seg" id="deco" role="group" aria-label="text decoration">
+        <button data-d="none" aria-pressed="true" title="no line"><span>ab</span></button><button data-d="underline" aria-pressed="false" title="underline"><span style="text-decoration:underline">ab</span></button><button data-d="line-through" aria-pressed="false" title="strikethrough"><span style="text-decoration:line-through">ab</span></button><button data-d="underline wavy" aria-pressed="false" title="wavy underline"><span style="text-decoration:underline wavy">ab</span></button><button data-d="underline dotted" aria-pressed="false" title="dotted underline"><span style="text-decoration:underline dotted">ab</span></button></div></div>
+      <div class="ctl t-caps"><div class="top"><span class="lbl">caps</span></div><div class="seg" id="caps" role="group" aria-label="capitals">
+        <button data-c="normal" aria-pressed="true" title="normal">Ab</button><button data-c="small-caps" aria-pressed="false" title="small caps"><span style="font-variant-caps:small-caps">Ab</span></button><button data-c="all-small-caps" aria-pressed="false" title="all small caps"><span style="font-variant-caps:all-small-caps">AB</span></button></div></div>
     </div>
     <p id="tpara">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></section>
   <section class="section" aria-labelledby="download"><h2 class="lab" id="download" style="grid-column:1/3">download <span aria-hidden="true">↘</span></h2>
@@ -345,16 +350,17 @@ const GROUPS=[
  ['central & eastern european','ĀĂĄĆĊĎĒĖĘĚĞĠĢĦĪĮİĶĹĻĽŁŅŇŐŔŘŚŞȘŤȚŪŮŰŲŴŶŹŻẀẂẄỲāăąćċďēėęěğġģħīįķĺļľłņňőŕřśşșťțūůűųŵŷźżẁẃẅỳȷ'],
  ['combining accents',['\u0300','\u0301','\u0302','\u0303','\u0304','\u0306','\u0307','\u0308','\u030A','\u030B','\u030C','\u0326','\u0327','\u0328'].map(m=>'◌'+m)],
  ['arrows','←↑→↓↖↗↘↙↻'],
+ ['small caps','abcdefghijklmnopqrstuvwxyz','sc'],
  ['ligatures',['fi','fl','ff','ft','fj','->','=>','<-']]];
 const CS=$('charsets');
-for(const [name,chars] of GROUPS){
+for(const [name,chars,feat] of GROUPS){
   const list=Array.isArray(chars)?chars:[...chars];
   const row=document.createElement('div');row.className='grow';CS.appendChild(row);
   const h=document.createElement('h3');h.innerHTML=name+'<span>('+list.length+')</span>';row.appendChild(h);
-  const g=document.createElement('div');g.className='cells'+(Array.isArray(chars)?' wide':'');
+  const g=document.createElement('div');g.className='cells'+(Array.isArray(chars)?' wide':'')+(feat?' '+feat:'');
   for(const c of list){const d=document.createElement('div');
     const mark=c.length===2&&/[\u0300-\u036f]/.test(c[1]);   // combining accents are shown on a dotted circle; label the accent itself
-    const code=c.length===1||mark?'u+'+c.codePointAt(mark?1:0).toString(16).padStart(4,'0'):(c[0]==='f'?'liga':'calt');   // OpenType feature: standard ligatures / contextual alternates
+    const code=feat==='sc'?'smcp':c.length===1||mark?'u+'+c.codePointAt(mark?1:0).toString(16).padStart(4,'0'):(c[0]==='f'?'liga':'calt');   // OpenType feature: standard ligatures / contextual alternates
     d.innerHTML='<small>'+code+'</small>';const ch=document.createElement('span');ch.className='g';ch.textContent=c;d.appendChild(ch);g.appendChild(d)}
   row.appendChild(g)}
 
@@ -429,8 +435,12 @@ STYLES.forEach(([w,n])=>[0,12].forEach(sl=>{const o=document.createElement('opti
 function tester(){const [w,sl]=$('tstyle').value.split(',').map(Number), fs=getVal($('tsize')), p=$('tpara');
   p.style.fontVariationSettings=`"wght" ${w}, "wdth" 100, "slnt" ${-sl}`; p.style.fontSize=fs+'px';
   $('tsizev').textContent=fs+'px'; fillTo($('tsize'))}
-document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b)); $('tpara').style.textAlign=b.dataset.a});
+// each button group (align, line, caps) is a pick-one: press one, the others in that group let go
+function group(id,apply){const bs=[...$(id).querySelectorAll('button')];
+  bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.setAttribute('aria-pressed',x===b));apply(b)})}
+group('align',b=>$('tpara').style.textAlign=b.dataset.a);
+group('deco',b=>$('tpara').style.textDecoration=b.dataset.d);           // underline, strikethrough, wavy, dotted
+group('caps',b=>$('tpara').style.fontVariantCaps=b.dataset.c);          // uses the font's own small capitals
 $('tstyle').onchange=tester; $('tsize').oninput=e=>{snap(e.target);tester()}; tester();
 
 let turns=0;
