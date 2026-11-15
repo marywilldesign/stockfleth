@@ -28,13 +28,14 @@ Units per em: 1000. The outer edges of the strokes stay on these lines at every 
 
 | line | height |
 |---|---|
-| cap height and ascender (b, d, h, k, l) | 700 |
+| ascender (b, d, f, h, k, l, t) | 750 |
+| cap height and figures | 700 |
 | x-height | 500 |
 | maths axis (+ − = × ÷ ¬ ·, dashes, arrows) | 350 |
 | baseline | 0 |
 | descender | −200 |
 
-Round letters overshoot each line by 8, and pointed ones (v, w, V, W, arrow tips) a little more, so they look the same size as the flat letters. Superior figures hang from the cap height (450–700), as do the ordinals ª º (540–700). Every character is one cell wide: 600 units at width 100, from 420 at width 70 to 870 at width 145.
+Round letters overshoot each line by 10 (1% of the em), and pointed ones (v, w, V, W, arrow tips) a little more, so they look the same size as the flat letters. Superior figures hang from the cap height (450–700), as do the ordinals ª º (540–700). Every character is one cell wide: 600 units at width 100, from 420 at width 70 to 870 at width 145.
 
 ## Works everywhere
 
@@ -66,7 +67,7 @@ Round letters overshoot each line by 8, and pointed ones (v, w, V, W, arrow tips
 
 ## Character inspector
 
-On the specimen page, hover over any character in the grid (or tap it on a tablet) to see it large against the lines above: cap height and ascender, x-height, baseline and descender, with dashed lines marking the edges of its cell. Alongside are its glyph name, Unicode name and code (decimal and hex), and the OpenType feature for small caps and ligatures. It follows the weight, width and slant sliders, and draws in the font's own units, so what it shows is where the font really puts each line. Combining accents are shown on a dotted circle; typed after a letter, they sit on that letter. On desktop the inspector stays beside the grid as you scroll; phones show the grid on its own.
+On the specimen page, hover over any character in the grid (or tap it on a tablet) to see it large against the lines above: ascender, cap height, x-height, baseline and descender, with dashed lines marking the edges of its cell. Alongside are its glyph name, Unicode name and code (decimal and hex), and the OpenType feature for small caps and ligatures. It follows the weight, width and slant sliders, and draws in the font's own units, so what it shows is where the font really puts each line. Combining accents are shown on a dotted circle; typed after a letter, they sit on that letter. On desktop the inspector sits to the right of the grid and stays in view as you scroll; phones show the grid on its own.
 
 ## About the specimen's "fit" mode
 

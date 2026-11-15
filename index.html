@@ -142,9 +142,9 @@ footer p{margin:0;flex:0 0 auto}   /* each block keeps its natural width, so its
 .t-style{grid-column:1/3}.t-size{grid-column:3/5}.t-align{grid-column:5/7}.t-deco{grid-column:1/3}.t-caps{grid-column:3/5}
 .cells.sc .g{font-variant-caps:small-caps}   /* the small caps row shows the smcp letters */
 /* character inspector: hover (or tap) a cell to see it large, against the font's own lines.
-   on wide screens it sits in columns 1-2 and follows you down the grid; the group names move above their cells */
-.chars .grow{grid-column:3/9;grid-template-columns:minmax(0,1fr)}.chars .grow h3,.chars .cells{grid-column:1/-1}.chars .grow h3{margin-bottom:8px}
-#insp{grid-column:1/3;grid-row:2/span 30;align-self:start;position:sticky;top:calc(var(--barh,0px) + 20px);padding-right:var(--gut)}
+   on wide screens it sits in columns 7-8, right of the grid, and follows you down it; the group names sit above their cells */
+.chars .grow{grid-column:1/7;grid-template-columns:minmax(0,1fr)}.chars .grow h3,.chars .cells{grid-column:1/-1}.chars .grow h3{margin-bottom:8px}
+#insp{grid-column:7/9;grid-row:2/span 30;align-self:start;position:sticky;top:calc(var(--barh,0px) + 20px)}
 #insp svg{display:block;width:100%;height:auto;overflow:visible}
 #insp line{stroke:var(--fg);stroke-width:1px;vector-effect:non-scaling-stroke}
 #insp line.edge{stroke-dasharray:3 4;opacity:.45}
@@ -215,7 +215,8 @@ footer .k{font-weight:1000}
     <aside id="insp" aria-label="selected character" aria-live="polite">
       <svg id="insp-svg" viewBox="-700 -1090 1400 1390" aria-hidden="true">
         <line class="edge" id="insp-l" x1="-300" x2="-300" y1="-1040" y2="210"/><line class="edge" id="insp-r" x1="300" x2="300" y1="-1040" y2="210"/>
-        <line class="m" x1="-700" x2="700" y1="-700" y2="-700"/><text class="lab l" x="-700" y="-718">CAP HEIGHT, ASCENDER</text><text class="lab r" x="700" y="-718" text-anchor="end">700</text>
+        <line class="m" x1="-700" x2="700" y1="-750" y2="-750"/><text class="lab l" x="-700" y="-764">ASCENDER</text><text class="lab r" x="700" y="-764" text-anchor="end">750</text>
+        <line class="m" x1="-700" x2="700" y1="-700" y2="-700"/><text class="lab l" x="-700" y="-652">CAP HEIGHT</text><text class="lab r" x="700" y="-652" text-anchor="end">700</text>
         <line class="m" x1="-700" x2="700" y1="-500" y2="-500"/><text class="lab l" x="-700" y="-518">X-HEIGHT</text><text class="lab r" x="700" y="-518" text-anchor="end">500</text>
         <line class="m" x1="-700" x2="700" y1="0" y2="0"/><text class="lab l" x="-700" y="58">BASELINE</text><text class="lab r" x="700" y="58" text-anchor="end">0</text>
         <line class="m" x1="-700" x2="700" y1="200" y2="200"/><text class="lab l" x="-700" y="258">DESCENDER</text><text class="lab r" x="700" y="258" text-anchor="end">−200</text>
