@@ -73,6 +73,9 @@ div.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-top:1px soli
 /* an invisible tap area around the small arrow, about 44px square, so it is easy to hit on a phone */
 #refresh{position:relative}
 #refresh::after{content:"";position:absolute;inset:-12px -16px}
+/* with a mouse or trackpad the colour codes themselves are the button (the cursor turns into ↻), so the
+   ↻ beside them goes; phones and tablets keep it to tap */
+@media (hover:hover) and (pointer:fine){#refresh{display:none}}
 .chip{height:22px;padding:0 8px;font-size:12px;margin:0 auto 0 10px;letter-spacing:.06em}
 .ctl .rng.auto input,.ctl .rng.auto .tick,.ctl .rng.auto::after{opacity:.4}
 .lbl,.val,.badge,.sub,.section>h2,.grow h3,footer.g8,.dl a span,.cap{text-transform:uppercase;letter-spacing:.06em}
@@ -531,6 +534,7 @@ function refreshColours(){
   $('colour-status').textContent=fam.name+', '+harmony+', contrast '+contrast(FG,BG).toFixed(1)+' to 1';
   const hex=c=>'#'+c.map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
   $('colourv').textContent=hex(FG)+' on '+hex(BG);   // the actual colours, not the family they were drawn from
+  if($('colourv').hasAttribute('role'))$('colourv').setAttribute('aria-label','next colour pairing, now '+$('colourv').textContent);
 }
 function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
@@ -539,10 +543,11 @@ function apply(){
 /* ---------------- cursors ---------------- */
 // every cursor is one of the typeface's own glyphs at a bold weight (outlines taken from the font, 32px box):
 // arrow = ↖, point = ↖ in a filled box like a pressed button, text = I, ew = the <-> arrows, cross = + (click a
-// character to copy it), no = ✗.
+// character to copy it), no = ✗, spin = ↻ (click the colour codes for the next pairing).
 // each is filled in the text colour with a background-coloured outline, so it shows on any surface,
 // and is redrawn whenever the colours change.
 const CUR={
+  spin:{d:'M7.8 28V11.34H19.22L13.88 5.88L15.8 4L24.2 12.58L15.84 21.51L13.88 19.68L19.31 13.89H10.62V25.48H23.75V28Z',hot:[16,16]},
   arrow:{d:'M7.2 10.12V28H3V3H26.77V6.8H9.6L27.48 26.2L24.55 28.93Z',hot:[3,3]},
   point:{d:'M9.86 11.84V24H7V7H23.16V9.58H11.49L23.65 22.78L21.65 24.63Z',hot:[7,7]},
   text:{d:'M21.29 3V5.89H17.6V26.71H21.29V29.6H10.68V26.71H14.38V5.89H10.68V3Z',hot:[16,16]},
@@ -553,11 +558,12 @@ const CUR={
 // which parts of the page get which cursor (only devices with a mouse or trackpad)
 const CUR_USE=[
   ['html','arrow'],
-  ['p,h1,h2,dd,dt,#stage,#tpara,#colourv,.lbl,.val,#insp text','text'],
+  ['p,h1,h2,dd,dt,#stage,#tpara,.lbl,.val,#insp text','text'],
   ['a,button,select,label,.chip,#refresh,#refresh *,a *,button *','point'],
   ['.cells div,.cells div *','cross'],
   ['input[type=range]','ew'],
   ['input[type=range]:disabled','no'],
+  ['#colourv','spin'],
 ];
 function cursors(){
   const fg=rgb2hex(FG), bg=rgb2hex(BG);
@@ -569,7 +575,7 @@ function cursors(){
     const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">${body}</svg>`;
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}") ${c.hot[0]} ${c.hot[1]}`};
   // fall back to the browser's own cursor of the same kind if an image can't be used
-  const sys={arrow:'default',point:'pointer',text:'text',ew:'ew-resize',cross:'crosshair',no:'not-allowed'};
+  const sys={arrow:'default',point:'pointer',text:'text',ew:'ew-resize',cross:'crosshair',no:'not-allowed',spin:'pointer'};
   let st=$('cur-style'); if(!st){st=document.createElement('style');st.id='cur-style';document.head.appendChild(st)}
   st.textContent='@media (hover:hover) and (pointer:fine){'+CUR_USE.map(([sel,k])=>`${sel}{cursor:${url(k)},${sys[k]}}`).join('')+'}';
 }
@@ -593,7 +599,16 @@ group('caps',b=>$('tpara').style.fontVariantCaps=b.dataset.c);          // uses 
 $('tstyle').onchange=tester; $('tsize').oninput=e=>{snap(e.target);tester()}; tester();
 
 let turns=0;
-$('refresh').onclick=e=>{const b=e.currentTarget; turns++; b.classList.add('spun'); b.style.setProperty('--r',turns*90+'deg'); refreshColours()};
+$('refresh').onclick=()=>nextColours();
+function nextColours(){const b=$('refresh'); turns++; b.classList.add('spun'); b.style.setProperty('--r',turns*90+'deg'); refreshColours()}
+// on desktop the colour codes act as the button: clickable, and reachable by keyboard
+const fineMouse=matchMedia('(hover:hover) and (pointer:fine)'), CV=$('colourv');
+CV.onclick=()=>{if(fineMouse.matches)nextColours()};
+CV.onkeydown=e=>{if(fineMouse.matches&&(e.key==='Enter'||e.key===' ')){e.preventDefault();nextColours()}};
+function colourButton(){const on=fineMouse.matches;
+  if(on){CV.setAttribute('role','button');CV.tabIndex=0;CV.setAttribute('aria-label','next colour pairing, now '+CV.textContent);CV.title='next colour pairing'}
+  else{CV.removeAttribute('role');CV.removeAttribute('tabindex');CV.removeAttribute('aria-label');CV.removeAttribute('title')}}
+colourButton(); fineMouse.addEventListener('change',colourButton);
 $('refresh').onmouseleave=$('refresh').onblur=e=>e.currentTarget.classList.remove('spun');
 lastFam=Math.floor(Math.random()*FAMILIES.length); refreshColours();
 /* reveal the page only once Stockfleth is ready, so no other font is ever shown */
