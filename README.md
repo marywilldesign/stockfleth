@@ -22,6 +22,20 @@ Named styles (Google Fonts names): Thin, ExtraLight, Light, Regular, Medium, Sem
 
 **Small capitals** (`font-variant-caps: small-caps` or `all-small-caps`, OpenType `smcp` / `c2sc`): the capitals redrawn at x-height with full-weight strokes, so they don't look pale like a browser's fake small caps. Every accented and Sámi letter has one too (á, č, đ, ŋ, ø, æ...), so small-caps words never fall back to a lowercase letter. **Underline and strikethrough** positions and thicknesses are set in the font (80% of the letter stroke) and follow the weight. On the web, browsers draw their own heavier lines unless you add `text-decoration-thickness: from-font`.
 
+## Metrics
+
+Units per em: 1000. The outer edges of the strokes stay on these lines at every weight and width; heavier weights grow inward.
+
+| line | height |
+|---|---|
+| cap height and ascender (b, d, h, k, l) | 700 |
+| x-height | 500 |
+| maths axis (+ − = × ÷ ¬ ·, dashes, arrows) | 350 |
+| baseline | 0 |
+| descender | −200 |
+
+Round letters overshoot each line by 8, and pointed ones (v, w, V, W, arrow tips) a little more, so they look the same size as the flat letters. Superior figures hang from the cap height (450–700), as do the ordinals ª º (540–700). Every character is one cell wide: 600 units at width 100, from 420 at width 70 to 870 at width 145.
+
 ## Works everywhere
 
 - **Design apps** (Figma, Adobe, Affinity, Sketch, Canva uploads): the variable TTF, or any static style.
@@ -49,6 +63,10 @@ Named styles (Google Fonts names): Thin, ExtraLight, Light, Regular, Medium, Sem
 }
 .headline { font-family: Stockfleth, ui-monospace, monospace; font-variation-settings: "wght" 700, "wdth" 120, "slnt" 0; }
 ```
+
+## Character inspector
+
+On the specimen page, hover over any character in the grid (or tap it on a tablet) to see it large against the lines above: cap height and ascender, x-height, baseline and descender, with dashed lines marking the edges of its cell. Alongside are its glyph name, Unicode name and code (decimal and hex), and the OpenType feature for small caps and ligatures. It follows the weight, width and slant sliders, and draws in the font's own units, so what it shows is where the font really puts each line. Combining accents are shown on a dotted circle; typed after a letter, they sit on that letter. On desktop the inspector stays beside the grid as you scroll; phones show the grid on its own.
 
 ## About the specimen's "fit" mode
 
