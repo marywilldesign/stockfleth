@@ -228,7 +228,7 @@ footer .k{font-weight:1000}
       <dl id="insp-dl"></dl>
       <button id="insp-x" aria-label="close">×</button>
     </aside>
-    <div id="charsets" style="display:contents"></div></section>
+    <div id="charsets" style="display:contents"></div><span class="sr" id="copy-status" aria-live="polite"></span></section>
   <section class="section tester" aria-labelledby="h-text"><h2 class="lab" id="h-text">paragraph</h2>
     <div class="tbar">
       <div class="ctl t-style"><div class="top"><span class="lbl">style</span></div><div class="selwrap"><select id="tstyle" aria-label="style"></select></div></div>
@@ -447,7 +447,21 @@ function closeInsp(){INSP.classList.remove('on');if(sel)sel.classList.remove('se
 const wideScreen=matchMedia('(min-width:1101px)'), canHover=matchMedia('(hover:hover)'), phone=matchMedia('(max-width:640px)');
 // hover follows the pointer on wide screens; a tap or click picks a cell anywhere (tap it again to close the panel)
 CS.addEventListener('mouseover',e=>{const d=e.target.closest('.cells div');if(d&&canHover.matches&&wideScreen.matches)inspect(d)});
-CS.addEventListener('click',e=>{const d=e.target.closest('.cells div');if(!d||phone.matches)return;if(d===sel&&!wideScreen.matches)closeInsp();else inspect(d)});
+CS.addEventListener('click',e=>{const d=e.target.closest('.cells div');if(!d)return;
+  if(canHover.matches)copyCell(d);   // with a mouse or trackpad, a click also copies (the + cursor)
+  if(phone.matches)return;if(d===sel&&!wideScreen.matches)closeInsp();else inspect(d)});
+// copies a cell's character: the accent alone for combining accents (not the dotted circle that holds it),
+// the plain letter for small caps, both characters for an arrow ligature. the cell's label says "copied" for a moment.
+function copyCell(d){
+  const c=d.dataset.k.replace(/^sc:/,''), mark=c.length===2&&/[\u0300-\u036f]/.test(c[1]), t=mark?c[1]:c;
+  const done=()=>{const lab=d.querySelector('small');clearTimeout(d._t);
+    if(!d._lab)d._lab=lab.textContent; lab.textContent='copied'; d._t=setTimeout(()=>{lab.textContent=d._lab},1200);
+    $('copy-status').textContent='copied '+(NAMES[d.dataset.k]||['',t])[1]};
+  // the clipboard api needs a secure page; older browsers fall back to a hidden text box
+  const old=()=>{const ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0';
+    document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(_){}ta.remove()};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(done,old);else old();
+}
 $('insp-x').onclick=closeInsp;
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!wideScreen.matches)closeInsp()});
 // wide screens start on the first letter; smaller ones wait for a tap
@@ -520,6 +534,44 @@ function refreshColours(){
 }
 function apply(){
   const r=document.documentElement.style;r.setProperty('--fg',rgb2hex(FG));r.setProperty('--bg',rgb2hex(BG));
+  cursors();
+}
+/* ---------------- cursors ---------------- */
+// every cursor is one of the typeface's own glyphs at a bold weight (outlines taken from the font, 32px box):
+// arrow = ↖, point = ↖ in a filled box like a pressed button, text = I, ew = the <-> arrows, cross = + (click a
+// character to copy it), no = ✗.
+// each is filled in the text colour with a background-coloured outline, so it shows on any surface,
+// and is redrawn whenever the colours change.
+const CUR={
+  arrow:{d:'M7.2 10.12V28H3V3H26.77V6.8H9.6L27.48 26.2L24.55 28.93Z',hot:[3,3]},
+  point:{d:'M9.86 11.84V24H7V7H23.16V9.58H11.49L23.65 22.78L21.65 24.63Z',hot:[7,7]},
+  text:{d:'M21.29 3V5.89H17.6V26.71H21.29V29.6H10.68V26.71H14.38V5.89H10.68V3Z',hot:[16,16]},
+  ew:{d:'M5.66 14.77H15.88V16.67H5.66L9.8 21.05L8.35 22.43L2 15.72L8.35 9L9.8 10.38ZM26.11 14.77 21.97 10.38 23.42 9 29.77 15.72 23.42 22.43 21.97 21.05 26.11 16.67H15.88V14.77Z',hot:[16,16]},
+  cross:{d:'M17.86 8.02V14.33H26.46V17.67H17.86V27H14.14V17.67H5.54V14.33H14.14V5H17.86Z',hot:[16,16]},
+  no:{d:'M10.25 7.15 15.15 12.46 16 13.42 16.85 12.46 21.75 7.15 24.51 4.18 27.09 6.58 24.33 9.55 19.43 14.85 18.41 16 19.43 17.14 27.09 25.41 24.51 27.82 16.85 19.53 16 18.58 15.15 19.53 7.49 27.82 4.91 25.41 12.57 17.14 13.59 16 12.57 14.85 7.67 9.55 4.91 6.58 7.49 4.18Z',hot:[16,16]}
+};
+// which parts of the page get which cursor (only devices with a mouse or trackpad)
+const CUR_USE=[
+  ['html','arrow'],
+  ['p,h1,h2,dd,dt,#stage,#tpara,#colourv,.lbl,.val,#insp text','text'],
+  ['a,button,select,label,.chip,#refresh,#refresh *,a *,button *','point'],
+  ['.cells div,.cells div *','cross'],
+  ['input[type=range]','ew'],
+  ['input[type=range]:disabled','no'],
+];
+function cursors(){
+  const fg=rgb2hex(FG), bg=rgb2hex(BG);
+  const url=k=>{const c=CUR[k];
+    // the pointing box: a solid square in the text colour with the arrow cut out of it
+    const body=k==='point'
+      ?`<rect x="2" y="2" width="27" height="27" fill="${fg}" stroke="${bg}" stroke-width="2"/><path d="${c.d}" fill="${bg}"/>`
+      :`<path d="${c.d}" fill="${fg}" stroke="${bg}" stroke-width="3" stroke-linejoin="miter" paint-order="stroke"/>`;
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">${body}</svg>`;
+    return `url("data:image/svg+xml,${encodeURIComponent(svg)}") ${c.hot[0]} ${c.hot[1]}`};
+  // fall back to the browser's own cursor of the same kind if an image can't be used
+  const sys={arrow:'default',point:'pointer',text:'text',ew:'ew-resize',cross:'crosshair',no:'not-allowed'};
+  let st=$('cur-style'); if(!st){st=document.createElement('style');st.id='cur-style';document.head.appendChild(st)}
+  st.textContent='@media (hover:hover) and (pointer:fine){'+CUR_USE.map(([sel,k])=>`${sel}{cursor:${url(k)},${sys[k]}}`).join('')+'}';
 }
 /* ---------------- paragraph tester: the 20 static styles (cut from the variable font at width 100) ---------------- */
 const STYLES=[[100,'thin'],[200,'extralight'],[300,'light'],[400,'regular'],[500,'medium'],[600,'semibold'],[700,'bold'],[800,'extrabold'],[900,'black'],[1000,'extrablack']];   // google fonts weight names

@@ -67,7 +67,7 @@ Round letters overshoot each line by 10 (1% of the em), and pointed ones (v, w, 
 
 ## Character inspector
 
-On the specimen page, hover over any character in the grid (or tap it on a tablet) to see it large against the lines above: ascender, cap height, x-height, baseline and descender, with dashed lines marking the edges of its cell. Alongside are its glyph name, Unicode name and code (decimal and hex), and the OpenType feature for small caps and ligatures. It follows the weight, width and slant sliders, and draws in the font's own units, so what it shows is where the font really puts each line. Combining accents are shown on a dotted circle; typed after a letter, they sit on that letter. On desktop the inspector sits to the right of the grid and stays in view as you scroll; phones show the grid on its own.
+On the specimen page, hover over any character in the grid (or tap it on a tablet) to see it large against the lines above: ascender, cap height, x-height, baseline and descender, with dashed lines marking the edges of its cell. Alongside are its glyph name, Unicode name and code (decimal and hex), and the OpenType feature for small caps and ligatures. It follows the weight, width and slant sliders, and draws in the font's own units, so what it shows is where the font really puts each line. With a mouse or trackpad, click any character to copy it (the cursor turns into a +); a combining accent copies on its own, without the dotted circle. Combining accents are shown on a dotted circle; typed after a letter, they sit on that letter. On desktop the inspector sits to the right of the grid and stays in view as you scroll; phones show the grid on its own.
 
 ## About the specimen's "fit" mode
 
