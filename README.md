@@ -35,7 +35,7 @@ Units per em: 1000. The outer edges of the strokes stay on these lines at every 
 | baseline | 0 |
 | descender | −200 |
 
-Round letters overshoot each line by 10 (1% of the em), and pointed ones (v, w, V, W, arrow tips) a little more, so they look the same size as the flat letters. Superior figures hang from the cap height (450–700), as do the ordinals ª º (540–700). Every character is one cell wide: 600 units at width 100, from 420 at width 70 to 870 at width 145.
+Round letters overshoot each line by 10 (1% of the em), and pointed ones (v, w, V, W, arrow tips) a little more, so they look the same size as the flat letters. Superior figures hang from the cap height (330–700), as do the ordinals ª º (470–700). Every character is one cell wide: 600 units at width 100, from 420 at width 70 to 870 at width 145.
 
 ## Works everywhere
 
