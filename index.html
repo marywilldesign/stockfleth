@@ -150,6 +150,9 @@ footer p{margin:0;flex:0 0 auto}   /* each block keeps its natural width, so its
 #insp line.edge{stroke-dasharray:3 4;opacity:.45}
 #insp .lab{font:900 44px Stockfleth;letter-spacing:.06em;fill:color-mix(in srgb,var(--fg) 65%,var(--bg))}
 #insp-g{font-family:Stockfleth;font-size:1000px;fill:var(--fg)}
+/* selecting the big character (or a line label) inverts it like any other text on the page; svg text
+   needs its own fill for that, or browsers paint it black on the highlight */
+#insp text::selection{fill:var(--bg);background:var(--fg)}
 #insp dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:18px 0 0;font-size:14px;line-height:1.35}
 #insp dt{opacity:.65;text-transform:uppercase;letter-spacing:.06em}#insp dd{margin:0;overflow-wrap:anywhere}
 #insp-x{display:none}
